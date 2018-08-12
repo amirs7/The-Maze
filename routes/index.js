@@ -5,7 +5,7 @@ const logger = require('../common').logger;
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Hello World!' });
+  res.render('index', { title: 'Hello World!, This is the maze' });
   return next();
 });
 
