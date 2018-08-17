@@ -2,11 +2,10 @@
     <title>Maze Puzzle</title>
 </head>
 <body>
-<h1>Show</h1>
-<h3>Puzzle</h3>
-<h3>Prerequisites</h3>
+<h3>Maze Puzzle</h3>
 <h4>Puzzle:</h4>
 <a href="/admin/puzzle/<%=mazePuzzle.puzzle.id%>"><p><%=mazePuzzle.title%></p></a>
+<h3>Prerequisites</h3>
 <ul>
     <%mazePuzzle.prerequisites.forEach(function(p){%>
     <li>
