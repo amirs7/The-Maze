@@ -10,6 +10,7 @@ const app = express();
 
 app.use(passport.isAuthenticated);
 
+
 app.use(async(req, res, next) => {
   const user = req.user;
   req.profile = await Profile.findUserProfile(user);
@@ -23,20 +24,28 @@ app.get('/', (req, res, next) => {
 
 
 app.get('/puzzles/:puzzleId', async(req, res) => {
-  let mazePuzzle = req.profile.viewedPuzzles.find(p => p.id === req.params.puzzleId);
   const profile = req.profile;
-  const hints = await Hint.find({ mazePuzzle, profile });
   let status = 'viewed';
-  if (await profile.hasSolved(mazePuzzle))
-    status = 'solved';
-  let answers = await profile.getAnswers(mazePuzzle);
-  if (!mazePuzzle)
+  let mazePuzzle = req.profile.viewedPuzzles.find(p => p.id === req.params.puzzleId);
+  if (mazePuzzle) {
+    if (await profile.hasSolved(mazePuzzle))
+      status = 'solved';
+    let answers = await profile.getAnswers(mazePuzzle);
+    const hints = await Hint.find({ mazePuzzle, profile });
+    console.log(answers)
+    return res.render('maze/puzzle', {
+      mazePuzzle, hints, answers, status
+    });
+  } else {
     mazePuzzle = await MazePuzzle.findById(req.params.puzzleId).populate('puzzle');
-  if (!mazePuzzle)
-    return res.sendStatus(404);
-  if (!await profile.viewPuzzle(mazePuzzle))
-    return res.render('common/error', { error: { message: 'You have to solve prerequisites of this puzzle first!' } });
-  res.render('maze/puzzle', { mazePuzzle, hints, answers, status });
+    if (!mazePuzzle)
+      return res.sendStatus(404);
+    if (!await profile.viewPuzzle(mazePuzzle))
+      return res.render('common/error', { error: { message: 'You have to solve prerequisites of this puzzle first!' } });
+    return res.render('maze/puzzle', {
+      mazePuzzle, hints:[], answers: [], status
+    });
+  }
 });
 
 app.post('/puzzles/:puzzleId/answer', async(req, res) => {

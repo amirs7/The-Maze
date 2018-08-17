@@ -90,7 +90,8 @@ profileSchema.methods.getAnswers = function(mazePuzzle) {
         $match: {
           _id: {
             $in: profile.answers
-          }
+          },
+          mazePuzzle: mazePuzzle._id,
         }
       }
     ]);
