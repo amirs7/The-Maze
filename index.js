@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongoStore = require('connect-mongo')(session);
 const methodOverride = require('method-override');
+const http = require('http');
+const ClientManager = require('./common/socket');
 
 const routes = require('./routes');
 const config = require('./config');
@@ -22,6 +24,7 @@ mongoose.connect(`mongodb://${config.dbUsername}:${config.dbPassword}@localhost:
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(`${__dirname}/public`));
 app.use(methodOverride('_method'));
 app.use(session({
   resave: false,
@@ -34,10 +37,18 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
   let body = req.body;
-  console.log(`[REQUEST]: ${req.method} ${req.path} ${JSON.stringify(body)}`);
+  //if (!(sockets[req.user.username].length > 0))
+  //  sockets[req.user.username].emit('salam', 'salam');
+  req.ip = req.headers['x-forwarded-for'] || req.ip;
+  console.log(`[REQUEST]: ${req.ip} ${req.method} ${req.path} ${JSON.stringify(body)}`);
   next();
 });
 
 app.use('/', routes);
 
-app.listen(config.serverPort);
+const server = http.Server(app);
+const clientManager = new ClientManager(server);
+
+server.listen(config.serverPort, () => {
+  console.log('listening on *:3000');
+});

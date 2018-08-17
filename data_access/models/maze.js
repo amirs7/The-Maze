@@ -11,14 +11,28 @@ const mazeSchema = new Schema({
 });
 
 mazeSchema.methods.addPuzzle = function(puzzle) {
-  return new Promise(async (resolve, reject) => {
+  let maze = this;
+  return new Promise(async(resolve, reject) => {
     try {
       const mazePuzzle = new MazePuzzle({ puzzle });
-      resolve(await mazePuzzle.save());
+      maze.puzzles.push(mazePuzzle);
+      await mazePuzzle.save();
+      resolve(await maze.save());
     } catch (error) {
       console.log(`[MONGO_ERROR]: ${error}`);
       reject(error);
     }
+  });
+};
+
+mazeSchema.statics.getInstance = function() {
+  return new Promise((resolve, reject) => {
+    mongoose.model('Maze').findOne({}).populate({
+      path: 'puzzles',
+      populate: [{ path: 'puzzle' }, { path: 'prerequisites', populate: { path: 'puzzle' } }]
+    }).exec((err, maze) => {
+      resolve(maze);
+    });
   });
 };
 

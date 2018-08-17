@@ -19,4 +19,13 @@ const puzzleSchema = new Schema({
   }
 });
 
+puzzleSchema.pre('remove', async function (next) {
+  const puzzle = this;
+  const mazePuzzles = await mongoose.model('MazePuzzle').find({ puzzle });
+  mazePuzzles.forEach(async (p) => {
+    await p.remove();
+  });
+  next();
+});
+
 module.exports = mongoose.model('Puzzle', puzzleSchema);

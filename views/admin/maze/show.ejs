@@ -1,0 +1,33 @@
+<head>
+    <title>Maze</title>
+</head>
+<body>
+<h1>Show</h1>
+<h2>The Maze</h2>
+<h3>Puzzles</h3>
+<ul>
+    <% maze.puzzles.forEach(function(mazePuzzle){ %>
+
+    <li>
+        <div>
+            <a href="/admin/maze/puzzles/<%= mazePuzzle.id %>">
+                <h3><%= mazePuzzle.puzzle.title %></h3>
+            </a>
+            <form action="/admin/maze/puzzles/<%= mazePuzzle.id %>?_method=DELETE" method="post">
+                <button type="submit">remove</button>
+            </form>
+        </div>
+    </li>
+    <% }) %>
+</ul>
+<form action="/admin/maze/puzzles" method="post">
+    <select name="puzzleId">
+        <% puzzles.forEach(p=>{ %>
+        <option value="<%= p.id %>">
+            <%= p.title %>
+        </option>
+        <% }) %>
+    </select>
+    <button type="submit">Add</button>
+</form>
+</body>

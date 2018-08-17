@@ -1,0 +1,10 @@
+<h1>User list</h1>
+<ul>
+    <%users.forEach(function(user){%>
+        <li>
+            <a href="/admin/user/<%=user.username%>">
+                <%=user.username%>
+            </a>
+        </li>
+    <%})%>
+</ul>

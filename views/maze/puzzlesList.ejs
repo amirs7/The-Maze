@@ -1,0 +1,18 @@
+<head>
+    <title>The Maze</title>
+</head>
+<body>
+<h3>Puzzles</h3>
+<ul>
+    <% mazePuzzles.forEach(function(mazePuzzle){ %>
+
+    <li>
+        <div>
+            <a href="/maze/puzzles/<%= mazePuzzle.id %>">
+                <h3><%= mazePuzzle.title %></h3>
+            </a>
+        </div>
+    </li>
+    <% }) %>
+</ul>
+</body>

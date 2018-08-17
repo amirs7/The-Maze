@@ -10,6 +10,14 @@ const hintSchema = new Schema({
   question: {
     type: String
   },
+  mazePuzzle: {
+    type: Schema.Types.ObjectId,
+    ref: 'MazePuzzle'
+  },
+  profile: {
+    type: Schema.Types.ObjectId,
+    ref: 'Profile'
+  },
   answer: {
     type: String
   },

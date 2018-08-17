@@ -16,6 +16,9 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  ip: {
+    type: String
+  },
   password: {
     type: String,
     required: true
@@ -24,13 +27,8 @@ const userSchema = new Schema({
     type: String,
     default: 'user',
     enum: ['user', 'admin']
-  },
-  currentProfile: {
-    type: String,
-    ref: 'Profile'
   }
 }, { _id: false });
-
 
 userSchema.pre('save', function(next) {
   let user = this;
@@ -53,6 +51,14 @@ userSchema.methods.comparePassword = function(candidatePassword) {
       if (err) return reject(err);
       resolve(isMatch);
     });
+  });
+};
+
+userSchema.methods.enrollToMaze = function(maze) {
+  const user = this;
+  return new Promise(async (resolve, reject) => {
+    user.profile = new mongoose.model('Profile')({ maze });
+    await user.save();
   });
 };
 

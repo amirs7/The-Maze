@@ -1,13 +1,20 @@
+<head>
+    <title>
+        Puzzle
+    </title>
+</head>
+<body>
 <h1>List</h1>
 <div>
-    <a href="new">New</a>
+    <a href="/admin/puzzle/new">New</a>
     <ol>
-        <%puzzles.forEach(function(puzzle) {%>
-            <li>
-                <a href="puzzle/<%=puzzle.id%>">
-                    <%=puzzle.title%>
-                </a>
-            </li>
-        <%})%>
+        <% puzzles.forEach(function(puzzle) { %>
+        <li>
+            <a href="puzzle/<%= puzzle.id %>">
+                <%= puzzle.title %>
+            </a>
+        </li>
+        <% }) %>
     </ol>
 </div>
+</body>

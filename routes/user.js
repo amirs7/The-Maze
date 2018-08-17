@@ -34,8 +34,12 @@ app.get('/login', (req, res, next) => {
 
 app.post('/login',
   passport.authenticate('local', { failureRedirect: '/user/login' }),
-  (req, res) => {
-    res.redirect('/home');
+  async (req, res) => {
+    let user = req.user;
+    user.ip = req.ip;
+    await user.save();
+    res.cookie('username', user.username);
+    res.redirect('/user/profile');
   });
 
 app.get('/profile', passport.isAuthenticated, (req, res) => {

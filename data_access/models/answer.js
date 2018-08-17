@@ -13,7 +13,7 @@ const answerSchema = new Schema({
   status: {
     type: String,
     default: 'na',
-    enum: ['na', 'solved', 'wrong']
+    enum: ['na', 'right', 'wrong']
   }
 });
 
