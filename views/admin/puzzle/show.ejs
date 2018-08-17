@@ -1,0 +1,39 @@
+<head>
+    <title>
+        Puzzle
+    </title>
+</head>
+<body>
+<h1>Show</h1>
+<h2> <%=puzzle.title%></h2>
+<ul>
+    <li>
+        <div>
+            <h3>Description</h3>
+            <%-puzzle.description%>
+        </div>
+    </li>
+    <li>
+        <div>
+            <h3>Feedback</h3>
+            <%-puzzle.feedback%>
+        </div>
+    </li>
+    <li>
+        <div>
+            <h3>Solution</h3>
+            <%-puzzle.solution%>
+        </div>
+    </li>
+</ul>
+<form action="<%=puzzle.id%>?_method=PUT" method="post">
+    <input name="title" placeholder="title" value="<%=puzzle.title%>">
+    <textarea name="description" placeholder="description"><%=puzzle.description%></textarea>
+    <textarea name="feedback" placeholder="feedback"><%=puzzle.feedback%></textarea>
+    <textarea name="solution" placeholder="solution"><%=puzzle.solution%></textarea>
+    <button type="submit">Update</button>
+</form>
+<form action="<%=puzzle.id%>?_method=DELETE" method="post">
+    <button type="submit">Delete</button>
+</form>
+</body>

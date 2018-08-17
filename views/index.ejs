@@ -3,9 +3,27 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var coords = {
+        lng:51.405755968484115,
+        lat:35.725170453135114
+      };
+      var socket = io();
+      socket.on('disconnect', ()=>{
+        console.log('Disconnected');
+      })
+      function send() {
+        console.log(socket.connected)
+        socket.emit('cord', coords);
+      }
+      console.log(socket);
+    </script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <button onclick="send()">Send</button>
+
   </body>
 </html>

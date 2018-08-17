@@ -1,0 +1,14 @@
+<h1>Hints</h1>
+<a href="/admin/maze/hint">All</a>
+<a href="/admin/maze/hint?status=asked">New</a>
+<a href="/admin/maze/hint?status=answered">Answered</a>
+<ul>
+    <%hints.forEach(function(hint) {%>
+       <li>
+           <a href="/admin/maze/hint/<%=hint.id%>"><%=hint.code%></a>
+       </li>
+    <%})%>
+</ul>
+<form action="/admin/maze/hint/generate" method="post">
+    <button type="submit">Generate Hint</button>
+</form>

@@ -1,0 +1,37 @@
+<h1>Puzzle</h1>
+<h2><%= mazePuzzle.title %></h2>
+<%- mazePuzzle.puzzle.description %>
+<br>
+<% if(status === 'solved'){ %>
+<%-mazePuzzle.puzzle.feedback%>
+<% }else{ %>
+<h3>Answers</h3>
+<ul>
+    <% answers.forEach(function(answer) { %>
+    <li>
+        <%= answer.text %>
+    </li>
+    <% }) %>
+</ul>
+<form action="/maze/puzzles/<%= mazePuzzle.id %>/answer" method="post">
+    <input name="answerText" placeholder="answer">
+    <button type="submit">Submit</button>
+</form>
+<h3>Hints</h3>
+<ul>
+    <% hints.forEach(function(hint) { %>
+    <li>
+        <div>
+            <p>Code:<%= hint.code %></p>
+            <textarea disabled><%= hint.question %></textarea>
+            <textarea disabled><%= hint.answer %></textarea>
+        </div>
+    </li>
+    <% }) %>
+</ul>
+<form action="/maze/puzzles/<%= mazePuzzle.id %>/hint" method="post">
+    <input name="code" placeholder="Hint Code">
+    <textarea name="question" placeholder="Type your question here"></textarea>
+    <button type="submit">Request Hint</button>
+</form>
+<% } %>

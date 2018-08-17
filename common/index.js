@@ -1,5 +1,6 @@
 const logger = require('./logger');
+const utils = require('./utils');
 
 module.exports = {
-  logger
+  logger,utils
 };

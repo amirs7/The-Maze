@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+          function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+              }
+            }
+            return "";
+          }
+        </script>
+        <script>
+          var socket = io();
+          socket.emit('username',getCookie('username'));
+          socket.on('disconnect', ()=>{
+            console.log('Disconnected');
+          });
+          socket.on('salam', (s)=>{
+            window.location = 'http://localhost:8080/home';
+          });
+        </script>
+    </head>
+    <body>
+        <h1>Profile</h1>
+        <h2><%=user.name%></h2>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+<h1>Hint</h1>
+<h2><%=hint.code%></h2>
+<% if(hint.status !== 'unused'){ %>
+<p>Question: <%= hint.question %></p>
+<a href="/admin/maze/puzzles/<%= hint.mazePuzzle.id %>"><%= hint.mazePuzzle.title %></a>
+<a href="/admin/maze/profiles/<%= hint.profile.id %>">User Profile</a>
+<%}%>
+<% if(hint.status === 'asked'){ %>
+    <form action="/admin/maze/hint/<%=hint.id%>" method="post">
+        <textarea required name="answer" placeholder="Answer"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+<% } %>
+<%if(hint.status === 'answered'){%>
+    <form action="/admin/maze/hint/<%=hint.id%>?_method=PUT" method="post">
+        <textarea required name="answer" placeholder="Answer">
+            <%=hint.answer%>
+        </textarea>
+        <button type="submit">Update</button>
+    </form>
+<%}%>
