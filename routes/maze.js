@@ -32,7 +32,6 @@ app.get('/puzzles/:puzzleId', async(req, res) => {
       status = 'solved';
     let answers = await profile.getAnswers(mazePuzzle);
     const hints = await Hint.find({ mazePuzzle, profile });
-    console.log(answers)
     return res.render('maze/puzzle', {
       mazePuzzle, hints, answers, status
     });

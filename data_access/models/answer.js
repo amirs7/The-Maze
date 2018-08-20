@@ -17,4 +17,12 @@ const answerSchema = new Schema({
   }
 });
 
+answerSchema.pre('save', async function(next) {
+  const answer = this;
+  const mazePuzzles = await mongoose.model('MazePuzzle').findById(answer.mazePuzzle).populate('puzzle');
+  if (mazePuzzles.puzzle.checkingType === 'online')
+    answer.status = answer.text.trim().toLowerCase() === mazePuzzles.puzzle.solution.trim().toLowerCase() ? 'right' : 'wrong';
+  next();
+});
+
 module.exports = mongoose.model('Answer', answerSchema);

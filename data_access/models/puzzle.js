@@ -14,15 +14,20 @@ const puzzleSchema = new Schema({
   solution: {
     type: String
   },
+  checkingType: {
+    enum: ['online', 'offline'],
+    default: 'online',
+    type: String
+  },
   feedback: {
     type: String
   }
 });
 
-puzzleSchema.pre('remove', async function (next) {
+puzzleSchema.pre('remove', async function(next) {
   const puzzle = this;
   const mazePuzzles = await mongoose.model('MazePuzzle').find({ puzzle });
-  mazePuzzles.forEach(async (p) => {
+  mazePuzzles.forEach(async(p) => {
     await p.remove();
   });
   next();
