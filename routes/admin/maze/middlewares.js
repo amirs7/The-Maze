@@ -28,6 +28,8 @@ async function addPuzzle(req, res) {
   res.redirect('/admin/maze');
 }
 
+
+
 async function showPuzzle(req, res) {
   const mazePuzzle = req.mazePuzzle;
   const mazePuzzles = req.maze.puzzles;
