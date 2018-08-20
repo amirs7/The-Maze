@@ -6,26 +6,12 @@
 <body>
 <h1>Show</h1>
 <h2> <%=puzzle.title%></h2>
-<ul>
-    <li>
-        <div>
-            <h3>Description</h3>
-            <%-puzzle.description%>
-        </div>
-    </li>
-    <li>
-        <div>
-            <h3>Feedback</h3>
-            <%-puzzle.feedback%>
-        </div>
-    </li>
-    <li>
-        <div>
-            <h3>Solution</h3>
-            <%-puzzle.solution%>
-        </div>
-    </li>
-</ul>
+<div>
+    <%-puzzle.description%>
+</div>
+<div>
+    <%-puzzle.feedback%>
+</div>
 <form action="<%=puzzle.id%>?_method=PUT" method="post">
     <input name="title" placeholder="title" value="<%=puzzle.title%>">
     <textarea name="description" placeholder="description"><%=puzzle.description%></textarea>
