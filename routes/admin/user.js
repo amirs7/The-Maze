@@ -10,6 +10,16 @@ app.get('/', async(req, res) => {
   res.render('admin/user/list', { users });
 });
 
+app.get('/new', async(req, res) => {
+  res.render('admin/user/new');
+});
+
+app.post('/', async(req, res) => {
+  let user = new User({ _id: req.body.username, name: req.body.name, password: req.body.password });
+  await user.save();
+  res.redirect('/admin/user');
+});
+
 app.get('/:username', async(req, res) => {
   const user = await User.findById(req.params.username);
   const profile = await Profile.findOne({ user });
@@ -19,7 +29,7 @@ app.get('/:username', async(req, res) => {
 app.post('/:username/profile', async(req, res) => {
   const user = await User.findById(req.params.username);
   const maze = await Maze.getInstance();
-  if(await Profile.findOne({ user }))
+  if (await Profile.findOne({ user }))
     return res.sendStatus(400);
   const profile = new Profile({ maze, user });
   await profile.save();
