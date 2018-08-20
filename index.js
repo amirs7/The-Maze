@@ -12,7 +12,12 @@ const routes = require('./routes');
 const config = require('./config');
 const passport = require('./common/passport');
 
-mongoose.connect(`mongodb://${config.dbUsername}:${config.dbPassword}@localhost:27017/maze?authSource=admin`, { useNewUrlParser: true })
+let connectionURL;
+if (config.dbUsername && config.dbPassword)
+  connectionURL = `mongodb://${config.dbUsername}:${config.dbPassword}@localhost:27017/maze?authSource=admin`;
+else
+  connectionURL = 'mongodb://localhost:27017/maze';
+mongoose.connect(connectionURL, { useNewUrlParser: true })
   .then(() => {
     console.log('Successfully connected to db');
   })
