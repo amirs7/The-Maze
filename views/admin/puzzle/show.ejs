@@ -10,9 +10,11 @@
     <div>
         <%-puzzle.description%>
     </div>
-    <div>
-        <%-puzzle.feedback%>
-    </div>
+</div>
+<div style="border-style: solid;border-width: thick;border-color: red">
+<div>
+    <%-puzzle.feedback%>
+</div>
 </div>
 <form action="<%=puzzle.id%>?_method=PUT" method="post">
     <input name="title" placeholder="title" value="<%=puzzle.title%>">
