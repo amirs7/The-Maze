@@ -7,7 +7,10 @@ let user = new User({
 });
 
 const Maze = require('./data_access/models/maze');
-let maze = new Maze();
+let maze;
+maze = Maze.findOne({});
+if(!maze)
+  maze = new Maze();
 maze.save().then(() => {
   user.save().then(() => {
     console.log('done');
