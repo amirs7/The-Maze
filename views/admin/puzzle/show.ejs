@@ -5,12 +5,14 @@
 </head>
 <body>
 <h1>Show</h1>
-<h2> <%=puzzle.title%></h2>
-<div>
-    <%-puzzle.description%>
-</div>
-<div>
-    <%-puzzle.feedback%>
+<div style="border-style: solid;border-width: thick;">
+    <h2> <%=puzzle.title%></h2>
+    <div>
+        <%-puzzle.description%>
+    </div>
+    <div>
+        <%-puzzle.feedback%>
+    </div>
 </div>
 <form action="<%=puzzle.id%>?_method=PUT" method="post">
     <input name="title" placeholder="title" value="<%=puzzle.title%>">
