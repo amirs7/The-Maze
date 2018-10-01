@@ -1,6 +1,40 @@
-<h1>Login</h1>
-<form action="login" method="post">
-    <input name="username"  placeholder="username">
-    <input name="password"  placeholder="password">
-    <input title="Submit" type="submit">
-</form>
+<html>
+	<head>
+		<link rel="stylesheet" href="/stylesheets/login.css">
+		<link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha21/dist/font-face.css" rel="stylesheet" type="text/css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<div class="maze_image">
+			<img src="/images/maze_pic.jpg">
+		</div>
+		<div class="header">
+			<h1> به Maze خوش آمدید! </h1>
+		</div>
+		<form class="login_form" action="login" method="post">
+			<div class="img"></div>
+			<div class="topbar">
+				<div class="topbar_login"> 
+					<h3> وارد شوید</h3>
+				</div>
+			</div>
+			<div class="formelements">
+				<div class="input_container">
+					<i class="fa fa-user"> </i> 
+					<input name="username" placeholder="نام کاربری" />
+				</div>
+				<div class="input_container">
+					<i class="fa fa-unlock-alt"> </i>
+					<input name="password" placeholder="رمز عبور" type="password"/>
+				</div>
+			</div>
+			<div class="bottombar">
+				<button type="submit">
+					<h4>ورود</h4>
+				</button>
+			</div>
+		</form>
+	</body>
+</html>
