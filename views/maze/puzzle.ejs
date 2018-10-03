@@ -12,7 +12,7 @@
     <div class="title">
         <h1> <%= mazePuzzle.title %> </h1>
 	</div>
-	<% if(status !== 'solved'){ %>  
+	<% if(status === 'solved'){ %>  
 		<div class="successful_message">
 			شما این پازل را حل کردید!
 		</div>
@@ -20,10 +20,10 @@
     <div class="section_head">
         <p>  توضیحات پازل </p>
     </div>
-    <div class="section_body description">
+    <div class="description">
         <%- mazePuzzle.puzzle.description %>
     </div>
-    <% if(status !== 'solved'){ %>  
+    <% if(status === 'solved'){ %>  
         <div class="section_head">
             <p> مشخصات پازل بعدی </p>
         </div>
@@ -62,11 +62,28 @@
                 <% if (hints.length>0) { %>
                     <ul>
                         <% hints.forEach(function(hint) { %>
-                            <li> <p onclick="openDetail()"> <%= hint.code %> </p> </li>
-                            <textarea id="detail" style="display: none;" 
-                                    class="hint_detail" rows="3" cols="30"
-                                    ><b>متن سوال</b>: aaa
-                            </textarea>
+                            <li> 
+                                <% if (hint.answer) { %> 
+                                    <p style="color: green" onclick="openDetail('<%=hint.code%>')"> <%= hint.code %> </p> 
+								<% } else { %>
+                                    <p style="color: blue" onclick="openDetail('<%=hint.code%>')"> <%= hint.code %> </p> 
+								<% } %>
+							</li>
+                            <div id="detail<%=hint.code%>" class="hint_detail_container">
+                                <div class="hint_detail">
+                                    <p> متن سوال : </p>
+                                    <textarea spellcheck="false" rows="2" cols="20"
+                                        ><%=hint.question%>
+                                    </textarea>
+                                </div> 
+                                <div class="hint_detail hint_answer">
+                                    <p> پاسخ : </p>
+                                    <textarea spellcheck="false" rows="2" cols="20" 
+                                        ><% if (hint.answer) { %> <%=hint.answer%>
+                                        <% } else { %>منتظر پاسخ بمانید!<% } %>
+                                    </textarea>
+                                </div>
+                            </div>
                         <% }) %>
                     </ul> 
                 <% } else { %>
@@ -78,7 +95,8 @@
                     کد راهنمایی : <input name="code">
                 </div>
                 <div class="hint_message">
-                    متن سوال :‌ <textarea name="question" rows="3" cols="30"> </textarea>
+                    <p> متن سوال : </p> 
+                    <textarea spellcheck="false" name="question" rows="3" cols="30"> </textarea>
                 </div>
                 <button type="submit" class="answer_submit">
                     ارسال
@@ -89,8 +107,8 @@
 </body>
 
 <script>
-    function openDetail() {
-        document.getElementById('detail').classList.toggle("show");
+    function openDetail(hintCode) {
+        document.getElementById('detail'+hintCode).classList.toggle("show");
     }
 </script>
 
