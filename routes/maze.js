@@ -18,7 +18,11 @@ app.use(async(req, res, next) => {
 });
 
 app.get('/', (req, res, next) => {
-  let mazePuzzles = req.profile.viewedPuzzles;
+  let mazePuzzles = [];
+  if(req.profile)
+    mazePuzzles = req.profile.viewedPuzzles;
+  else
+    return res.redirect('/user/login');
   res.render('maze/puzzlesList', { mazePuzzles });
 });
 

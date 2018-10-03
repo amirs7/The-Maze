@@ -36,6 +36,16 @@ app.post('/:username/profile', async(req, res) => {
   res.redirect(`/admin/user/${user.username}`);
 });
 
+app.delete('/:username/profile', async(req, res) => {
+  const user = await User.findById(req.params.username);
+  const maze = await Maze.getInstance();
+  let profile = await Profile.findOne({ user });
+  if (!profile)
+    return res.sendStatus(404);
+  await profile.remove();
+  res.redirect(`/admin/user/${user.username}`);
+});
+
 app.param('/:username', async(req, res, next, id) => {
   req.user = await User.findById(id);
   next();
