@@ -40,6 +40,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.use((req, res, next) => {
   let body = req.body;
   //if (!(sockets[req.user.username].length > 0))
@@ -55,5 +56,5 @@ const server = http.Server(app);
 const clientManager = new ClientManager(server);
 
 server.listen(config.serverPort, () => {
-  console.log('listening on *:3000');
+  console.log(config);
 });
