@@ -53,16 +53,12 @@ body {
 
 .card:hover .card_top_section img {
   transform: scale(1.1);
+  transition: 0.7s;
 }
 
 .card img {
   width: 200px;
   height: 200px;
-  transition: 0.7s;
-}
-
-.card a {
-  text-decoration: none;
 }
 
 .card_top_section {
@@ -77,11 +73,14 @@ body {
   height: 42px;
   background: rgb(175, 174, 174);
   padding-top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card_bottom_section p {
   font-size: 16pt;
-  color: black !important;
-  margin: 0;
-  margin-right: 70px !important;
+  /* margin: 0;
+  margin-right: 70px !important; */
+  color: black;
 }
