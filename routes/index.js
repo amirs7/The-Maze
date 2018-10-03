@@ -12,9 +12,8 @@ app.use('/user', userRoutes);
 app.use('/maze', mazeRoutes);
 app.use('/admin', adminRoutes);
 
-app.get('/home', (req, res, next) => {
-  res.render('index', { title: 'Hello World!, This is the maze' });
-  return next();
+app.get('/', (req, res, next) => {
+  res.render('landing');
 });
 
 app.get('/guard', (req, res, next) => {
