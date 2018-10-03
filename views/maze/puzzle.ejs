@@ -1,4 +1,100 @@
-<h1>Puzzle</h1>
+<head>
+    <title> The Maze </title> 
+    <link rel="stylesheet" href="/stylesheets/puzzle.css">
+    <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha21/dist/font-face.css" rel="stylesheet" type="text/css"/>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="maze_image">
+        <img src="/images/maze_pic.jpg">
+    </div>
+    <div class="title">
+        <h1> <%= mazePuzzle.title %> </h1>
+	</div>
+	<% if(status !== 'solved'){ %>  
+		<div class="successful_message">
+			شما این پازل را حل کردید!
+		</div>
+	<% } %>
+    <div class="section_head">
+        <p>  توضیحات پازل </p>
+    </div>
+    <div class="section_body description">
+        <%- mazePuzzle.puzzle.description %>
+    </div>
+    <% if(status !== 'solved'){ %>  
+        <div class="section_head">
+            <p> مشخصات پازل بعدی </p>
+        </div>
+        <div class="section_body feedback">
+            <%-mazePuzzle.puzzle.feedback%>
+        </div>  
+    <% }else{ %>
+        <div class="section_head">
+            <p> پاسخ ها </p>
+        </div>
+        <div class="answers">
+            <div class="item_container">
+                <% if (answers.length>0) { %>
+                    <% answers.forEach(function(answer) { %>
+                        <div class="answer_item"> 
+                            <img src="/images/cross.png">
+                            <%= answer.text %>
+						</div>
+					<% }) %>
+                <% } else { %>
+					<p class="empty_items"> پاسخی ارسال نکردید! </p>
+				<% } %>
+            </div> 
+            <form action="/maze/puzzles/<%= mazePuzzle.id %>/answer" method="post">
+                <input name="answerText">
+                <button type="submit" class="answer_submit">
+                    ارسال
+                </button>
+            </form>
+        </div>
+        <div class="section_head">
+            <p> کمک بگیرید ! </p>
+        </div>
+        <div class="hints">
+            <div class="item_container">
+                <% if (hints.length>0) { %>
+                    <ul>
+                        <% hints.forEach(function(hint) { %>
+                            <li> <p onclick="openDetail()"> <%= hint.code %> </p> </li>
+                            <textarea id="detail" style="display: none;" 
+                                    class="hint_detail" rows="3" cols="30"
+                                    ><b>متن سوال</b>: aaa
+                            </textarea>
+                        <% }) %>
+                    </ul> 
+                <% } else { %>
+					<p class="empty_items"> راهنمایی نخواستید! </p> 
+				<% } %>
+            </div>
+            <form action="/maze/puzzles/<%= mazePuzzle.id %>/hint" method="post">
+                <div class="hint_code">
+                    کد راهنمایی : <input name="code">
+                </div>
+                <div class="hint_message">
+                    متن سوال :‌ <textarea name="question" rows="3" cols="30"> </textarea>
+                </div>
+                <button type="submit" class="answer_submit">
+                    ارسال
+                </button>
+            </form>
+        </div>
+    <% } %>
+</body>
+
+<script>
+    function openDetail() {
+        document.getElementById('detail').classList.toggle("show");
+    }
+</script>
+
+<!-- <h1>Puzzle</h1>
 <h2><%= mazePuzzle.title %></h2>
 <%- mazePuzzle.puzzle.description %>
 <br>
@@ -34,4 +130,4 @@
     <textarea name="question" placeholder="Type your question here"></textarea>
     <button type="submit">Request Hint</button>
 </form>
-<% } %>
+<% } %> -->

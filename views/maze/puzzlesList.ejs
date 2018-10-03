@@ -1,18 +1,33 @@
 <head>
     <title>The Maze</title>
+    <link rel="stylesheet" href="/stylesheets/puzzleList.css">
+    <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha21/dist/font-face.css" rel="stylesheet" type="text/css"/>
+    <meta charset="utf-8">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-<h3>Puzzles</h3>
-<ul>
-    <% mazePuzzles.forEach(function(mazePuzzle){ %>
-
-    <li>
-        <div>
-            <a href="/maze/puzzles/<%= mazePuzzle.id %>">
-                <h3><%= mazePuzzle.title %></h3>
-            </a>
-        </div>
-    </li>
-    <% }) %>
-</ul>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <div class="maze_image">
+        <img src="/images/maze_pic.jpg">
+    </div>
+    <div class="header">
+        <h3> پازل های باز شده : </h3>
+    </div>
+    <div class="card_container">
+        <% mazePuzzles.forEach(function(mazePuzzle){ %>
+            <div class="card" data-aos="zoom-in">
+                <a href="/maze/puzzles/<%= mazePuzzle.id %>">
+                    <div class="card_top_section">
+                        <img src="/images/joker_pic.jpg">
+                    </div>
+                    <div class="card_bottom_section">
+                        <p> <%= mazePuzzle.title %> </p>
+                    </div>
+                </a>
+            </div>
+        <% }) %>
+    </div>
 </body>

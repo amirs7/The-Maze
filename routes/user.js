@@ -23,7 +23,7 @@ app.post('/login',
     user.ip = req.ip;
     await user.save();
     res.cookie('username', user.username);
-    res.redirect('/user/profile');
+    res.redirect('/maze');
 });
 
 app.get('/profile', passport.isAuthenticated, (req, res) => {
