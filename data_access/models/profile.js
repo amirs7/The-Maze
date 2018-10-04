@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const profileSchema = new Schema({
   stage: {
-    type: String
+    type: Number
   },
   user: {
     type: String,
