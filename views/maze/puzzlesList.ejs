@@ -15,13 +15,21 @@
     </div>
     <div class="header">
         <h3> پازل های باز شده : </h3>
+        <div class="links">
+            <a href="/images/maze_instruction.pdf">
+                <button class="btn"> دستورالعمل </button>
+            </a>
+            <a href="/images/newMap.JPG">
+                <button class="btn"> نقشه مناطق </button>
+            </a>
+        </div>
     </div>
     <div class="card_container">
         <% mazePuzzles.forEach(function(mazePuzzle){ %>
             <div class="card" data-aos="zoom-in">
                 <a href="/maze/puzzles/<%= mazePuzzle.id %>">
                     <div class="card_top_section">
-                        <img src="/images/joker_pic.jpg">
+                        <img src="/images/puzzle_<%=mazePuzzle.title%>.jpg">
                     </div>
                     <div class="card_bottom_section">
                         <p> <%= mazePuzzle.title %> </p>
