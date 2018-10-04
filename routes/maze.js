@@ -26,7 +26,6 @@ app.get('/', (req, res, next) => {
   res.render('maze/puzzlesList', { mazePuzzles });
 });
 
-
 app.get('/puzzles/:puzzleId', async(req, res) => {
   const profile = req.profile;
   let status = 'viewed';

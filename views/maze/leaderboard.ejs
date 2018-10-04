@@ -1,0 +1,13 @@
+<html>
+<head>
+
+</head>
+<body>
+    <h1>Leader Board</h1>
+    <div>
+        <%profiles.forEach(profile =>{%>
+          <p><%=profile.user.name%>: <%=profile.stage%> </p>
+        <%})%>
+    </div>
+</body>
+</html>
