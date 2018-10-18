@@ -4,7 +4,7 @@ function validateEmail(email) {
 }
 
 function isEnglish(text) {
-  const english = /^[A-Za-z0-9]*$/;
+  const english = /^[A-Za-z0-9\s]*$/;
   return english.test(String(text));
 }
 

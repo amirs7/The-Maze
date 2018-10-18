@@ -56,17 +56,8 @@ app.get('/leaderboard', async(req, res, next) => {
   res.render('maze/leaderboard', { profiles });
 });
 
-app.get('/guard', (req, res, next) => {
-  res.render('common/guard');
-  return next();
-});
-
 app.use((err, req, res, next) => {
   logger.error(err);
 });
-
-//router.use((req, res, next) => {
-//  res.sendStatus(404);
-//});
 
 module.exports = app;
