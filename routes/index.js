@@ -52,7 +52,7 @@ app.get('/leaderboard', async(req, res, next) => {
   let mazePuzzles = await MazePuzzle.find({});
   let arr = [];
   profiles = await calcAllStages(profiles, mazePuzzles);
-  profiles.sort((a, b) => a.stage < b.stage);
+  profiles = profiles.sort((a, b) => a.stage < b.stage);
   res.render('maze/leaderboard', { profiles });
 });
 
