@@ -72,7 +72,6 @@ app.get('/verify/:token', async function(req, res, next) {
 });
 
 app.get('/profile', passport.isAuthenticated, (req, res) => {
-  console.log(req.user);
   return res.render('user/profile', { user: req.user });
 });
 

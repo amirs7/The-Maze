@@ -1,5 +1,6 @@
 <h1>User Profile</h1>
 <h4><%=user.username%></h4>
+<h4><%=user.name%></h4>
 <%if(profile){%>
 <form action="/admin/user/<%=user.username%>/profile?_method=DELETE" method="post">
     <button type="submit">Delete Profile</button>
