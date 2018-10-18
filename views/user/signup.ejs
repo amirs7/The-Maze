@@ -52,5 +52,16 @@
 				</button>
 			</div>
 		</form>
+        <div class="successful_message_container">
+            <div id="message" class="successful_message hide">
+                اطلاعات شما ثبت شد. <br> برای تایید اکانت به ایمیل خود مراجعه کنید! 
+            </div>
+        </div>
 	</body>
 </html>
+
+<script>
+    function showMessage() {
+        document.getElementById("message").classList.remove("hide");
+    }
+</script>

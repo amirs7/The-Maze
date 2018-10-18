@@ -174,3 +174,21 @@ body {
     background: rgba(0, 0, 0, 0.4);
   }
   
+  .successful_message_container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .successful_message {
+    padding-top: 10px;
+    width: 350px;
+    height: 60px;
+    background: green;
+    display: flex;
+    justify-content: center; 
+  }
+
+  .hide {
+    display: none !important;
+  }
