@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="/stylesheets/singup.css">
+		<link rel="stylesheet" href="/stylesheets/signup.css">
 		<link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha21/dist/font-face.css" rel="stylesheet" type="text/css"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,25 +25,25 @@
 					<div class="icon">
                         <i class="fa fa-user"> </i> 
                     </div>
-					<input name="username" placeholder="نام" />
+					<input required name="name" placeholder="نام" value="<%=data.name%>"/>
                 </div>
                 <div class="input_container">
                     <div class="icon">
                         <i class="fa fa-envelope-open"> </i> 
                     </div>
-					<input name="email" placeholder="ایمیل" />
+					<input required name="email" placeholder="ایمیل" value="<%=data.username%>"/>
                 </div>
 				<div class="input_container">
                     <div class="icon">
                         <i class="fa fa-unlock-alt"> </i>
                     </div>
-					<input name="password" placeholder="رمز عبور" type="password"/>
+					<input required name="password" placeholder="رمز عبور" type="password"/>
                 </div>
                 <div class="input_container">
                     <div class="icon">
                         <i class="fa fa-unlock-alt"> </i>
                     </div>
-                    <input name="password" placeholder="تکرار رمز عبور" type="password"/>
+                    <input required name="repeatPassword" placeholder="تکرار رمز عبور" type="password"/>
                 </div>
 			</div>
 			<div class="bottombar">
@@ -52,16 +52,18 @@
 				</button>
 			</div>
 		</form>
-        <div class="successful_message_container">
-            <div id="message" class="successful_message hide">
-                اطلاعات شما ثبت شد. <br> برای تایید اکانت به ایمیل خود مراجعه کنید! 
-            </div>
-        </div>
+		<%if(status === 'success'){%>
+			<div class="successful_message_container">
+					<div id="message" class="successful_message">
+						<%=message%>
+					</div>
+			</div>
+		<%}else if(status === 'error'){%>
+			<div class="successful_message_container">
+					<div id="message" class="error_message">
+						<%=message%>
+					</div>
+			</div>
+		<%}%>
 	</body>
 </html>
-
-<script>
-    function showMessage() {
-        document.getElementById("message").classList.remove("hide");
-    }
-</script>

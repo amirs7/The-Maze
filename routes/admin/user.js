@@ -26,6 +26,12 @@ app.get('/:username', async(req, res) => {
   res.render('admin/user/show', { user, profile });
 });
 
+app.delete('/:username', async(req, res) => {
+  const user = await User.findById(req.params.username);
+  await user.remove();
+  res.redirect('/admin/user/');
+});
+
 app.post('/:username/profile', async(req, res) => {
   const user = await User.findById(req.params.username);
   const maze = await Maze.getInstance();

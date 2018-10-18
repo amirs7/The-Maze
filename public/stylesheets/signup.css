@@ -189,6 +189,15 @@ body {
     justify-content: center; 
   }
 
+.error_message {
+  padding-top: 10px;
+  width: 350px;
+  height: 60px;
+  background: red;
+  display: flex;
+  justify-content: center;
+}
+
   .hide {
     display: none !important;
   }

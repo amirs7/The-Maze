@@ -5,6 +5,9 @@
     <button type="submit">Delete Profile</button>
 </form>
 <%}else{%>
+<form action="/admin/user/<%=user.username%>?_method=DELETE" method="post">
+    <button type="submit">Delete User</button>
+</form>
 <form action="/admin/user/<%=user.username%>/profile" method="post">
     <button type="submit">Create Profile</button>
 </form>

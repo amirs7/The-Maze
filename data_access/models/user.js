@@ -45,6 +45,11 @@ userSchema.pre('save', function(next) {
   });
 });
 
+userSchema.pre('remove', async function(next) {
+  let user = this;
+  await mongoose.model('Profile').remove({ user });
+});
+
 userSchema.methods.comparePassword = function(candidatePassword) {
   return new Promise((resolve, reject) => {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
@@ -56,7 +61,7 @@ userSchema.methods.comparePassword = function(candidatePassword) {
 
 userSchema.methods.enrollToMaze = function(maze) {
   const user = this;
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async(resolve, reject) => {
     user.profile = new mongoose.model('Profile')({ maze });
     await user.save();
   });
