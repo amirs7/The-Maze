@@ -6,7 +6,7 @@ const session = require('express-session');
 const mongoStore = require('connect-mongo')(session);
 const methodOverride = require('method-override');
 const http = require('http');
-const ClientManager = require('./common/socket');
+const helmet = require('helmet');
 
 const routes = require('./routes');
 const config = require('./config');
@@ -39,21 +39,17 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(helmet());
 
 app.use((req, res, next) => {
-  let body = req.body;
-  //if (!(sockets[req.user.username].length > 0))
-  //  sockets[req.user.username].emit('salam', 'salam');
   req.ip = req.headers['x-forwarded-for'] || req.ip;
-  console.log(`[REQUEST]: ${req.ip} ${req.method} ${req.path} ${JSON.stringify(body)}`);
+  console.log(`[REQUEST]: ${req.ip} ${req.method} ${req.path} ${JSON.stringify(req.body)}`);
   next();
 });
 
 app.use('/', routes);
 
 const server = http.Server(app);
-const clientManager = new ClientManager(server);
 
 server.listen(config.serverPort, () => {
   console.log(config);
