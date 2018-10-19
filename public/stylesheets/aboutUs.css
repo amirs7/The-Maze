@@ -41,7 +41,7 @@ body {
 
 .page_container img {
 	width: 80%;
-	height: 300px;
+	height: 50%;
 	margin-right: 9%;
 	margin-left: 9%;
 	margin-top: 20px;
@@ -58,5 +58,5 @@ body {
 }
 
 .maze_pic {
-	height: 400px !important;
+	height: 60% !important;
 }
