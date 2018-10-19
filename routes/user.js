@@ -69,7 +69,7 @@ app.get('/verify/:token', async function(req, res, next) {
   let userData = jwt.verify(req.params.token, config.jwtSecret);
   let user = await User.findOne({ _id: userData.username });
   if (user)
-    result = { status: 'error', message: 'این ایمیل قبلا ثبت شده است.' };
+    return res.render('user/login', { status: 'error', message: 'این لینک قبلا استفاده شده است.'});
   user = new User(userData);
   await user.save();
   res.redirect('/user/login');
