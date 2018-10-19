@@ -55,8 +55,8 @@ body {
 }
 
 .page_container p {
-	margin-right: 2%;
-	margin-left: 2%;
+	margin-right: 5%;
+	margin-left: 5%;
 }
 
 .link {
@@ -68,5 +68,5 @@ body {
 }
 
 .text-parts {
-	margin: 0% 10%;
+	/* margin: 0% 10%; */
 }
