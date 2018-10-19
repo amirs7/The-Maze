@@ -72,7 +72,7 @@ app.get('/verify/:token', async function(req, res, next) {
     return res.render('user/login', { status: 'error', message: 'این لینک قبلا استفاده شده است.'});
   user = new User(userData);
   await user.save();
-  res.redirect('/user/login');
+  return res.render('user/login', { status: 'success', message: 'ثبت‌ نام شما با موفقیت انجام شد.'});
 });
 
 app.get('/profile', passport.isAuthenticated, (req, res) => {
