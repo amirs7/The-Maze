@@ -178,22 +178,31 @@ body {
     margin-top: 30px;
     display: flex;
     justify-content: center;
+    border-radius: 10px;
+    border-width: 10px;
+    border-color: green;
   }
 
   .successful_message {
     padding-top: 10px;
-    width: 350px;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 30%;
     height: 60px;
     background: green;
+    border-radius: 10px;
     display: flex;
     justify-content: center; 
   }
 
 .error_message {
   padding-top: 10px;
-  width: 350px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 30%;
   height: 60px;
   background: red;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
 }

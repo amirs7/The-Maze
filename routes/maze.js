@@ -14,16 +14,28 @@ app.use(passport.isAuthenticated);
 app.use(async(req, res, next) => {
   const user = req.user;
   req.profile = await Profile.findUserProfile(user);
+  if(!req.profile)
+    return res.redirect('/maze');
   next();
 });
 
+app.get('/leaderboard', async(req, res, next) => {
+  let profiles = await Profile.find({}).populate(['answers', 'user']);
+  let mazePuzzles = await MazePuzzle.find({});
+  let arr = [];
+  profiles = await calcAllStages(profiles, mazePuzzles);
+  profiles = profiles.sort((a, b) => a.stage < b.stage);
+  res.render('maze/leaderboard', { profiles });
+});
+
 app.get('/', (req, res, next) => {
-  let mazePuzzles = [];
-  if(req.profile)
-    mazePuzzles = req.profile.viewedPuzzles;
-  else
-    return res.redirect('/user/login');
-  res.render('maze/puzzlesList', { mazePuzzles });
+  //let mazePuzzles = [];
+  //if(req.profile)
+  //  mazePuzzles = req.profile.viewedPuzzles;
+  //else
+  //  return res.redirect('/user/login');
+  //res.render('maze/puzzlesList', { mazePuzzles });
+  res.render('landing');
 });
 
 app.get('/puzzles/:puzzleId', async(req, res) => {

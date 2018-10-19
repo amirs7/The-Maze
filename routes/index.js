@@ -1,6 +1,7 @@
 const express = require('express');
 
 const userRoutes = require('./user');
+const passport = require('../common/passport');
 const Profile = require('../data_access/models/profile');
 const MazePuzzle = require('../data_access/models/mazePuzzle');
 const adminRoutes = require('./admin');
@@ -18,6 +19,14 @@ app.use('/admin', adminRoutes);
 app.get('/', (req, res, next) => {
   res.redirect('/user/signup');
   //res.render('landing');
+});
+
+app.get('/about', (req, res, next) => {
+  res.render('about');
+});
+
+app.use('*', passport.isAuthenticated, (req, res) => {
+  res.render('landing');
 });
 
 function calcStage(mazePuzzles, profile) {
@@ -48,14 +57,6 @@ function calcAllStages(profiles, mazePuzzles) {
   });
 }
 
-app.get('/leaderboard', async(req, res, next) => {
-  let profiles = await Profile.find({}).populate(['answers', 'user']);
-  let mazePuzzles = await MazePuzzle.find({});
-  let arr = [];
-  profiles = await calcAllStages(profiles, mazePuzzles);
-  profiles = profiles.sort((a, b) => a.stage < b.stage);
-  res.render('maze/leaderboard', { profiles });
-});
 
 app.use((err, req, res, next) => {
   logger.error(err);

@@ -36,5 +36,18 @@
 				</button>
 			</div>
 		</form>
+        <%if(status === 'success'){%>
+		<div class="successful_message_container">
+			<div id="message" class="successful_message">
+                <%=message%>
+			</div>
+		</div>
+        <%}else if(status === 'error'){%>
+		<div class="successful_message_container">
+			<div id="message" class="error_message">
+                <%=message%>
+			</div>
+		</div>
+        <%}%>
 	</body>
 </html>
