@@ -25,8 +25,12 @@ app.get('/about', (req, res, next) => {
   res.render('about');
 });
 
-app.use('*', passport.isAuthenticated, (req, res) => {
+app.use('/home', passport.isAuthenticated, (req, res) => {
   res.render('landing');
+});
+
+app.use('*', passport.isAuthenticated, (req, res) => {
+  res.redirect('/home');
 });
 
 function calcStage(mazePuzzles, profile) {
