@@ -8,27 +8,30 @@ const MazePuzzle = require('../data_access/models/mazePuzzle');
 
 const app = express();
 
-app.use(passport.isAuthenticated);
+// app.use(passport.isAuthenticated);
 
 
-app.use(async(req, res, next) => {
+app.use(async (req, res, next) => {
   const user = req.user;
   req.profile = await Profile.findUserProfile(user);
-  if(!req.profile)
+  if (!req.profile)
     return res.redirect('/maze');
   next();
 });
 
-app.get('/leaderboard', async(req, res, next) => {
+app.get('/leaderboard', async (req, res, next) => {
   let profiles = await Profile.find({}).populate(['answers', 'user']);
   let mazePuzzles = await MazePuzzle.find({});
   let arr = [];
   profiles = await calcAllStages(profiles, mazePuzzles);
   profiles = profiles.sort((a, b) => a.stage < b.stage);
-  res.render('maze/leaderboard', { profiles });
+  res.render('maze/leaderboard', {
+    profiles
+  });
 });
 
 app.get('/', (req, res, next) => {
+  console.log("hadi");
   //let mazePuzzles = [];
   //if(req.profile)
   //  mazePuzzles = req.profile.viewedPuzzles;
@@ -38,7 +41,7 @@ app.get('/', (req, res, next) => {
   res.render('landing');
 });
 
-app.get('/puzzles/:puzzleId', async(req, res) => {
+app.get('/puzzles/:puzzleId', async (req, res) => {
   const profile = req.profile;
   let status = 'viewed';
   let mazePuzzle = req.profile.viewedPuzzles.find(p => p.id === req.params.puzzleId);
@@ -46,23 +49,36 @@ app.get('/puzzles/:puzzleId', async(req, res) => {
     if (await profile.hasSolved(mazePuzzle))
       status = 'solved';
     let answers = await profile.getAnswers(mazePuzzle);
-    const hints = await Hint.find({ mazePuzzle, profile });
+    const hints = await Hint.find({
+      mazePuzzle,
+      profile
+    });
     return res.render('maze/puzzle', {
-      mazePuzzle, hints, answers, status
+      mazePuzzle,
+      hints,
+      answers,
+      status
     });
   } else {
     mazePuzzle = await MazePuzzle.findById(req.params.puzzleId).populate('puzzle');
     if (!mazePuzzle)
       return res.sendStatus(404);
     if (!await profile.viewPuzzle(mazePuzzle))
-      return res.render('common/error', { error: { message: 'You have to solve prerequisites of this puzzle first!' } });
+      return res.render('common/error', {
+        error: {
+          message: 'You have to solve prerequisites of this puzzle first!'
+        }
+      });
     return res.render('maze/puzzle', {
-      mazePuzzle, hints:[], answers: [], status
+      mazePuzzle,
+      hints: [],
+      answers: [],
+      status
     });
   }
 });
 
-app.post('/puzzles/:puzzleId/answer', async(req, res) => {
+app.post('/puzzles/:puzzleId/answer', async (req, res) => {
   let profile = req.profile;
   if (!req.body || !req.body.answerText)
     return res.sendStatus(400);
@@ -70,16 +86,26 @@ app.post('/puzzles/:puzzleId/answer', async(req, res) => {
   res.redirect(`/maze/puzzles/${req.params.puzzleId}`);
 });
 
-app.post('/puzzles/:puzzleId/hint', async(req, res) => {
+app.post('/puzzles/:puzzleId/hint', async (req, res) => {
   const code = req.body.code;
   const question = req.body.question;
   if (!code || !question)
     return res.sendStatus(400);
-  const hint = await Hint.findOne({ code });
+  const hint = await Hint.findOne({
+    code
+  });
   if (!hint)
-    return res.render('common/error', { error: { message: 'Hint code is invalid!' } });
+    return res.render('common/error', {
+      error: {
+        message: 'Hint code is invalid!'
+      }
+    });
   if (hint.status !== 'unused')
-    return res.render('common/error', { error: { message: 'Hint code has been already used!' } });
+    return res.render('common/error', {
+      error: {
+        message: 'Hint code has been already used!'
+      }
+    });
   hint.mazePuzzle = req.params.puzzleId;
   hint.profile = req.profile;
   hint.question = question;

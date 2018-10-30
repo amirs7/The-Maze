@@ -1,0 +1,268 @@
+body {
+	direction: rtl;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	background: #1e1e1e;
+	color: white;
+	font-family: sahel;
+}
+
+.maze_image {
+	text-align: center;
+	margin-top: 15px;
+}
+
+.maze_image img {
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+}
+
+.title {
+	text-align: center;
+	width: 100%;
+	height: 50px;
+}
+
+.section_head {
+	padding-top: 10px;
+	width: 30%;
+	height: 50px;
+	margin-right: 3%;
+	border-bottom: 1px solid black;
+}
+
+.section_head p {
+	margin-top: 13px;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+.description {
+	/* height: 300px; */
+	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-right: 3%;
+	padding-top: 10px;
+	padding-right: 20px;
+	/* border: 1px solid red; */
+	font-size: 14pt;
+}
+
+.description_margin {
+	margin-top: 0px;
+}
+
+.description_title {
+	margin-top: 0px;
+	font-weight: bold;
+}
+
+.frame {
+	height: 250px;
+	width: 250px;
+}
+
+.crossword {
+	height: 600px;
+	width: 600px;
+}
+
+.inline {
+	display: flex;
+	flex-wrap: nowrap;
+	margin-top: 30px;
+	/* justify-content: space-around; */
+}
+
+.maze_puzzle {
+	height: 500px;
+	width: 500px;
+	margin-right: 30px;
+	margin-left: 60px;
+}
+
+.maze_crossword {
+	height: 500px;
+	width: 500px;
+}
+
+.sum_table {
+	margin-top: 10px;
+	height: 800px;
+	width: 800px;
+}
+
+.green {
+	color: green;
+}
+
+.english {
+	direction: ltr;
+	width: 7%;
+}
+
+.feedback {
+	height: 500px !important;
+	margin-right: 50px;
+}
+
+.feedback_image {
+	display: flex;
+	flex-wrap: nowrap;
+	width: 500px;
+	height: 400px;
+	/* border: 1px solid green; */
+	justify-content: space-between;
+}
+
+.feedback img {
+	height: 400px;
+	width: 400px;
+}
+
+.answers {
+	margin-top: 20px;
+	margin-right: 3%;
+	margin-bottom: 30px;
+}
+
+.hints {
+	margin-top: 20px;
+	margin-right: 3%;
+}
+
+.answers div {
+	margin-bottom: 5px;
+}
+
+.item_container {
+	margin-bottom: 40px !important;
+}
+
+.answer_item {
+	margin-right: 1%;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	height: 30px;
+}
+
+.answer_item img {
+	widows: 20px;
+	height: 20px;
+	margin-left: 10px;
+}
+
+.empty_items {
+	margin-right: 1%;
+	font-size: 12pt;
+	font-style: italic;
+	opacity: 0.7;
+}
+
+input {
+	margin-right: 2%;
+	padding: 5px 10px;
+	display: block;
+	width: 175px;
+}
+
+.hint_message textarea {
+	/* margin-top: 20px; */
+	margin-right: 2%;
+	padding: 5px 10px;
+}
+
+.answer_submit {
+	display: block;
+	background: rgb(1, 170, 1);
+	margin-right: 2%;
+	margin-top: 15px;
+	border: none;
+	color: black;
+	padding: 3px 6px;
+	font-family: sahel;
+}
+
+.answer_submit:hover {
+	background: green;
+}
+
+.hints {
+	margin-right: 3%;
+}
+
+.hints li {
+	margin-bottom: 5px;
+}
+
+.hints li p {
+	cursor: pointer;
+}
+
+.hint_code {
+	margin-right: 2%;
+	display: flex;
+	flex-wrap: nowrap;
+	margin-bottom: 10px;
+}
+
+.hint_message {
+	margin-right: 2%;
+	display: flex;
+	align-items: center;
+}
+
+.hint_message p {
+	margin-left: 15px;
+}
+
+.hint_detail {
+	margin-right: 10px;
+	display: flex;
+	flex-wrap: nowrap;
+	margin-bottom: 10px;
+}
+
+.hint_detail p {
+	/* margin-bottom: 10px; */
+	margin-top: 5px;
+	margin-left: 20px;
+}
+
+.hint_detail input {
+	/* height: 50px; */
+}
+
+.hint_answer p {
+	margin-left: 50px !important;
+}
+
+.hint_detail textarea {
+	padding: 5px 10px;
+}
+
+.item_container p {
+	margin-bottom: 0px;
+}
+
+.hint_detail_container {
+	display: none;
+}
+
+.show {
+	display: inline !important;
+}
+
+.successful_message {
+	margin: 0 auto;
+	background: green;
+	width: 170px;
+	height: 30px;
+	text-align: center;
+	font-style: italic;
+	border: none;
+	/* border-radius: 30% !important; */
+}

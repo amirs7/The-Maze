@@ -1,0 +1,152 @@
+<head>
+    <title>The Maze</title>
+    <link rel="stylesheet" href="./puzzleList.css">
+    <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha21/dist/font-face.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <!-- <div class="maze_image">
+        <img src="./maze_pic.jpg">
+    </div> -->
+    <div class="header">
+        <h3> پازل های باز شده : </h3>
+        <div class="links">
+
+            <div class="icons" onclick="openInstruction()">
+                <button class="btn"> دستورالعمل </button>
+                <i class="fa fa-info"></i>
+            </div>
+
+            <div class="icons" onclick="openMap()">
+                <button class="btn"> نقشه مناطق </button>
+                <i class="fa fa-map"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="card_container">
+        <div class="card" data-aos="zoom-in">
+            <a href="/maze/puzzles/<%= mazePuzzle.id %>">
+                <div class="card_top_section">
+                    <img src="./puzzle_Joker.jpg">
+                </div>
+                <div class="card_bottom_section">
+                    <p>
+                        Joker
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="card" data-aos="zoom-in">
+            <a href="/maze/puzzles/<%= mazePuzzle.id %>">
+                <div class="card_top_section">
+                    <img src="./puzzle_Gotham.jpg">
+                </div>
+                <div class="card_bottom_section">
+                    <p>
+                        Gotham
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="card" data-aos="zoom-in">
+            <a href="/maze/puzzles/<%= mazePuzzle.id %>">
+                <div class="card_top_section">
+                    <img src="./puzzle_Joker.jpg">
+                </div>
+                <div class="card_bottom_section">
+                    <p>
+                        abcas
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="card" data-aos="zoom-in">
+            <a href="/maze/puzzles/<%= mazePuzzle.id %>">
+                <div class="card_top_section">
+                    <img src="./puzzle_Joker.jpg">
+                </div>
+                <div class="card_bottom_section">
+                    <p>
+                        kadfjl
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div class="card" data-aos="zoom-in">
+            <a href="/maze/puzzles/<%= mazePuzzle.id %>">
+                <div class="card_top_section">
+                    <img src="./puzzle_Joker.jpg">
+                </div>
+                <div class="card_bottom_section">
+                    <p>
+                        kadfjl
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div class="card" data-aos="zoom-in">
+            <a href="/maze/puzzles/<%= mazePuzzle.id %>">
+                <div class="card_top_section">
+                    <img src="./puzzle_Joker.jpg">
+                </div>
+                <div class="card_bottom_section">
+                    <p>
+                        kadfjl
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div class="card" data-aos="zoom-in">
+            <a href="/maze/puzzles/<%= mazePuzzle.id %>">
+                <div class="card_top_section">
+                    <img src="./puzzle_Joker.jpg">
+                </div>
+                <div class="card_bottom_section">
+                    <p>
+                        kadfjl
+                    </p>
+                </div>
+            </a>
+        </div>
+
+
+        <div class="card" data-aos="zoom-in">
+            <a href="/maze/puzzles/<%= mazePuzzle.id %>">
+                <div class="card_top_section">
+                    <img src="./puzzle_Joker.jpg">
+                </div>
+                <div class="card_bottom_section">
+                    <p>
+                        akdljfl;aj
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+
+
+
+<script>
+    function openMap() {
+        console.log("zhivar");
+        window.location.href = "map.jpg";
+    }
+
+    function openInstruction() {
+        console.log("hadi");
+        window.location.href = "maze_instruction.pdf";
+    }
+</script>

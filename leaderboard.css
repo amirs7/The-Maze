@@ -1,0 +1,78 @@
+.record {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    margin: 0px auto;
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+.record:nth-child(even) {
+    background: #6e6e6e;
+
+}
+
+.record:nth-child(odd) {
+    background: rgb(94, 94, 94);
+}
+
+.record:nth-last-child(1) {
+    border: none;
+}
+
+.record:nth-child(1) {
+    background: linear-gradient(to right, #5b5b5b, #848484);
+    height: 63px;
+    line-height: 4;
+}
+
+body {
+    background: #1e1e1e;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+
+}
+
+.group-name {
+    margin-left: 60px;
+    color: white;
+}
+
+.group-stage {
+    margin-right: 60px;
+    color: #f1f1f1;
+}
+
+.record-list {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    overflow: scroll;
+    padding: 0;
+    z-index: 1000000000000;
+    font-weight: 700;
+}
+
+
+
+h1 {
+    color: lightgray;
+    position: fixed;
+    width: 100%;
+    background: #4f4f4f;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    box-shadow: 0 1px 40px 1px black;
+    height: 80px;
+    line-height: 2.5;
+    margin: 0;
+
+}
