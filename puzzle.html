@@ -6,9 +6,9 @@
 </head>
 
 <body>
-    <div class="maze_image">
+    <!-- <div class="maze_image">
         <img src="maze_pic.jpg">
-    </div>
+    </div> -->
     <div class="title">
         <h1>
             lkdfjsla;kdjf;
@@ -67,11 +67,11 @@
         </div>
         <form action="/maze/puzzles/<%= mazePuzzle.id %>/hint" method="post">
             <div class="hint_code">
-                کد راهنمایی : <input name="code">
+                کد راهنمایی : <input name="code" class="hint-code">
             </div>
             <div class="hint_message">
                 <p> متن سوال : </p>
-                <textarea spellcheck="false" name="question" rows="3" cols="30"> </textarea>
+                <textarea class="text-area" spellcheck="false" name="question" rows="3" cols="30"> </textarea>
             </div>
             <button type="submit" class="answer_submit">
                 ارسال

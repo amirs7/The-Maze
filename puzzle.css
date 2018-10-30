@@ -30,7 +30,7 @@ body {
 	width: 30%;
 	height: 50px;
 	margin-right: 3%;
-	border-bottom: 1px solid black;
+	border-bottom: 2px solid grey;
 }
 
 .section_head p {
@@ -177,17 +177,20 @@ input {
 
 .answer_submit {
 	display: block;
-	background: rgb(1, 170, 1);
+	background: rgb(77, 77, 77);
+	width: 80px;
 	margin-right: 2%;
 	margin-top: 15px;
 	border: none;
-	color: black;
+	border-radius: 15px;
+	color: white;
 	padding: 3px 6px;
 	font-family: sahel;
 }
 
 .answer_submit:hover {
-	background: green;
+	background: #676767;
+	cursor: pointer;
 }
 
 .hints {
@@ -258,11 +261,24 @@ input {
 
 .successful_message {
 	margin: 0 auto;
-	background: green;
-	width: 170px;
+	border-radius: 15px;
+	background: #3a5b3a;
+	width: 260px;
 	height: 30px;
 	text-align: center;
 	font-style: italic;
 	border: none;
 	/* border-radius: 30% !important; */
+}
+
+h1 {
+	margin-top: 50px;
+}
+
+.hint-code {
+	margin-right: 50px !important;
+}
+
+.text-area {
+	margin-right: 47px !important;
 }
