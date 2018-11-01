@@ -57,12 +57,15 @@ app.post('/signup', async(req, res, next) => {
   if (user)
     return res.render('user/signup', { status: 'error', message: 'این ایمیل قبلا ثبت شده است.', data: userData });
   let token = jwt.sign(userData, config.jwtSecret);
-  mailer.sendVerificationEmail(`${config.hostname}/user/verify/${token}`, userData.username);
-  res.render('user/signup', {
-    status: 'success',
-    message: 'اطلاعات شما ثبت شد. برای تکمیل ثبت نام از لینکی که برای شما ایمیل شده است استفاده کنید.',
-    data: {}
-  });
+  // mailer.sendVerificationEmail(`${config.hostname}/user/verify/${token}`, userData.username);
+  // res.render('user/signup', {
+  //   status: 'success',
+  //   message: 'اطلاعات شما ثبت شد. برای تکمیل ثبت نام از لینکی که برای شما ایمیل شده است استفاده کنید.',
+  //   data: {}
+  // });
+  user = new User(userData);
+  await user.save();
+  return res.render('user/login', { status: 'success', message: 'ثبت‌ نام شما با موفقیت انجام شد.' });
 });
 
 app.get('/verify/:token', async function(req, res, next) {

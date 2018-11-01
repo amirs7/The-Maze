@@ -20,7 +20,11 @@ app.get('/puzzles/:mazePuzzleId', maze.showPuzzle);
 
 app.post('/puzzles/:mazePuzzleId/prerequisites', maze.addPrerequisite);
 
+app.post('/puzzles/:mazePuzzleId/feedbacks', maze.addFeedback);
+
 app.delete('/puzzles/:mazePuzzleId/prerequisites/:prerequisiteId', maze.removePrerequisite);
+
+app.delete('/puzzles/:mazePuzzleId/feedbacks/:feedbackId', maze.removeFeedback);
 
 app.delete('/puzzles/:mazePuzzleId', maze.removePuzzle);
 

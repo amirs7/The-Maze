@@ -18,9 +18,6 @@ const puzzleSchema = new Schema({
     enum: ['online', 'offline'],
     default: 'online',
     type: String
-  },
-  feedback: {
-    type: String
   }
 });
 

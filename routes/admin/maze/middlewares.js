@@ -1,9 +1,11 @@
 const Maze = require('../../../data_access/models/maze');
 const MazePuzzle = require('../../../data_access/models/mazePuzzle');
 const Puzzle = require('../../../data_access/models/puzzle');
+const Feedback = require('../../../data_access/models/feedback');
 
 async function findMaze(req, res, next) {
   req.maze = await Maze.getInstance();
+  console.log(req.maze);
   next();
 }
 
@@ -28,8 +30,6 @@ async function addPuzzle(req, res) {
   res.redirect('/admin/maze');
 }
 
-
-
 async function showPuzzle(req, res) {
   const mazePuzzle = req.mazePuzzle;
   const mazePuzzles = req.maze.puzzles;
@@ -45,9 +45,25 @@ async function addPrerequisite(req, res) {
   res.redirect(`/admin/maze/puzzles/${mazePuzzle.id}`);
 }
 
+async function addFeedback(req, res) {
+  const mazePuzzle = req.mazePuzzle;
+  const feedback = new Feedback({ location: req.body.feedbackId });
+  if (feedback)
+    mazePuzzle.feedbacks.addToSet(feedback);
+  await mazePuzzle.save();
+  res.redirect(`/admin/maze/puzzles/${mazePuzzle.id}`);
+}
+
 async function removePrerequisite(req, res) {
   const mazePuzzle = req.mazePuzzle;
   mazePuzzle.prerequisites.remove(req.params.prerequisiteId);
+  await mazePuzzle.save();
+  res.redirect(`/admin/maze/puzzles/${mazePuzzle.id}`);
+}
+
+async function removeFeedback(req, res) {
+  const mazePuzzle = req.mazePuzzle;
+  mazePuzzle.feedbacks.remove(req.params.feedbackId);
   await mazePuzzle.save();
   res.redirect(`/admin/maze/puzzles/${mazePuzzle.id}`);
 }
@@ -62,5 +78,5 @@ async function removePuzzle(req, res) {
 }
 
 module.exports = {
-  findMaze, findMazePuzzle, index, addPuzzle, showPuzzle, removePuzzle, addPrerequisite, removePrerequisite
+  findMaze, findMazePuzzle, index, addPuzzle, showPuzzle, removePuzzle, addPrerequisite, addFeedback, removePrerequisite, removeFeedback
 };
