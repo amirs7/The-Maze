@@ -18,9 +18,15 @@
 </div>
 <form action="<%=puzzle.id%>?_method=PUT" method="post">
     <input name="title" placeholder="title" value="<%=puzzle.title%>">
+    <input name="level" placeholder="level" value="<%=puzzle.level%>">
     <textarea name="description" placeholder="description"><%=puzzle.description%></textarea>
     <textarea name="feedback" placeholder="feedback"><%=puzzle.feedback%></textarea>
     <textarea name="solution" placeholder="solution"><%=puzzle.solution%></textarea>
+    <br>
+    <%for(var i=0; i < puzzle.level; i++){ %>
+        <label>hint<%=i%></label>
+        <input name="hints<%i%>" placeholder="hint<%=i%>" value="<%=puzzle.hints[i]%>">
+    <%}%>
     <button type="submit">Update</button>
 </form>
 <form action="<%=puzzle.id%>?_method=DELETE" method="post">

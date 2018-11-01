@@ -13,24 +13,11 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.use('/user', userRoutes);
-//app.use('/maze', mazeRoutes);
+app.use('/maze', mazeRoutes);
 app.use('/admin', adminRoutes);
-
-app.get('/', (req, res, next) => {
-  res.redirect('/user/signup');
-  //res.render('landing');
-});
 
 app.get('/about', (req, res, next) => {
   res.render('about');
-});
-
-app.use('/home', passport.isAuthenticated, (req, res) => {
-  res.render('landing');
-});
-
-app.use('*', passport.isAuthenticated, (req, res) => {
-  res.redirect('/home');
 });
 
 function calcStage(mazePuzzles, profile) {

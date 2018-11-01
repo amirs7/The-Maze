@@ -2,13 +2,10 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const hintSchema = new Schema({
+const hintCodeSchema = new Schema({
   code: {
     type: String,
     required: true
-  },
-  question: {
-    type: String
   },
   mazePuzzle: {
     type: Schema.Types.ObjectId,
@@ -18,14 +15,10 @@ const hintSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Profile'
   },
-  answer: {
-    type: String
-  },
-  status: {
-    type: String,
-    default: 'unused',
-    enum: ['unused', 'asked', 'answered']
+  step: {
+    type: Number,
+    default: -1
   }
 });
 
-module.exports = mongoose.model('Hint', hintSchema);
+module.exports = mongoose.model('HintCode', hintCodeSchema);

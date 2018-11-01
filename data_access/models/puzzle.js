@@ -14,6 +14,11 @@ const puzzleSchema = new Schema({
   solution: {
     type: String
   },
+  level: {
+    type: Number,
+    default: 0
+  },
+  hints: [String],
   checkingType: {
     enum: ['online', 'offline'],
     default: 'online',
