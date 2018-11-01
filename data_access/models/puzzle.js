@@ -11,6 +11,9 @@ const puzzleSchema = new Schema({
     type: String,
     required: true
   },
+  feedback: {
+    type: String,
+  },
   solution: {
     type: String
   },

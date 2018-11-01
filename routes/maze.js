@@ -11,7 +11,6 @@ const app = express();
 
 app.use(passport.isAuthenticated);
 
-
 app.use(async(req, res, next) => {
   const user = req.user;
   req.profile = await Profile.findUserProfile(user);
@@ -73,7 +72,7 @@ app.get('/puzzles/:puzzleId', async(req, res) => {
     let clue = {};
     if (mazePuzzle.nextPuzzle.clues.length > 0)
       clue = mazePuzzle.nextPuzzle.clues[0 % mazePuzzle.nextPuzzle.clues.length];
-    console.log(await getMaximumHintStepOfPuzzle(mazePuzzle._id, profile._id));
+    //console.log(await getMaximumHintStepOfPuzzle(mazePuzzle._id, profile._id));
     const hints = [];
     return res.render('maze/puzzle', {
       mazePuzzle, hints, answers, status, clue
@@ -92,7 +91,7 @@ app.get('/puzzles/:puzzleId', async(req, res) => {
 
 app.get('/clues/:clueId', async(req, res, next) => {
   let clue = await Clue.findById(req.params.clueId);
-  if(!clue.mazePuzzle)
+  if (!clue.mazePuzzle)
     return res.sendStatus(404);
   const profile = req.profile;
   let status = 'viewed';
