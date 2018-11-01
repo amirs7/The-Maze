@@ -1,5 +1,5 @@
 <head>
-    <title> The Maze </title> 
+    <title> The Maze </title>
     <link rel="stylesheet" href="/stylesheets/puzzle.css">
     <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha21/dist/font-face.css" rel="stylesheet" type="text/css"/>
     <meta charset="utf-8">
@@ -12,7 +12,7 @@
     <div class="title">
         <h1> <%= mazePuzzle.title %> </h1>
 	</div>
-	<% if(status === 'solved'){ %>  
+	<% if(status === 'solved'){ %>
 		<div class="successful_message">
 			شما این پازل را حل کردید!
 		</div>
@@ -23,17 +23,17 @@
     <div class="description">
         <%- mazePuzzle.puzzle.description %>
     </div>
-    <div class="description">
-        <%- mazePuzzle.puzzle.feedback%>
-    </div>
-    <% if(status === 'solved'){ %>  
+    <% if(status === 'solved'){ %>
         <div class="section_head">
             <p> مشخصات پازل بعدی </p>
         </div>
         <div class="section_body feedback">
-            <p>ناحیه: <%=clue.locationIndex%></p>
-            <%-clue.html%>
-        </div>  
+            <div><%- mazePuzzle.puzzle.feedback%></div>
+            <div>
+                <p>ناحیه:  <%=nextPuzzleClue.locationIndex%></p>
+                <%-nextPuzzleClue.html%>
+            </div>
+        </div>
     <% }else{ %>
         <div class="section_head">
             <p> پاسخ ها </p>
@@ -42,7 +42,7 @@
             <div class="item_container">
                 <% if (answers.length>0) { %>
                     <% answers.forEach(function(answer) { %>
-                        <div class="answer_item"> 
+                        <div class="answer_item">
                             <img src="/images/cross.png">
                             <%= answer.text %>
 						</div>
@@ -50,7 +50,7 @@
                 <% } else { %>
 					<p class="empty_items"> پاسخی ارسال نکردید! </p>
 				<% } %>
-            </div> 
+            </div>
             <form action="/maze/puzzles/<%= mazePuzzle.id %>/answer" method="post">
                 <input name="answerText">
                 <button type="submit" class="answer_submit">
@@ -62,36 +62,19 @@
             <p> کمک بگیرید ! </p>
         </div>
         <div class="hints">
+            <h5>راهنمایی ها:</h5>
             <div class="item_container">
-                <% if (hints.length>0) { %>
+                <% if (hints) { %>
                     <ul>
-                        <% hints.forEach(function(hint) { %>
-                            <li> 
-                                <% if (hint.answer) { %> 
-                                    <p style="color: green" onclick="openDetail('<%=hint.code%>')"> <%= hint.code %> </p> 
-								<% } else { %>
-                                    <p style="color: blue" onclick="openDetail('<%=hint.code%>')"> <%= hint.code %> </p> 
-								<% } %>
-							</li>
-                            <div id="detail<%=hint.code%>" class="hint_detail_container">
+                        <% hints.forEach(function(hint, i) { %>
                                 <div class="hint_detail">
-                                    <p> متن سوال : </p>
-                                    <textarea spellcheck="false" rows="2" cols="20"
-                                        ><%=hint.question%>
-                                    </textarea>
-                                </div> 
-                                <div class="hint_detail hint_answer">
-                                    <p> پاسخ : </p>
-                                    <textarea spellcheck="false" rows="2" cols="20" 
-                                        ><% if (hint.answer) { %> <%=hint.answer%>
-                                        <% } else { %>منتظر پاسخ بمانید!<% } %>
-                                    </textarea>
+                                    <p> <%=i+1%> </p>
+                                    <p><%=hint%></p>
                                 </div>
-                            </div>
                         <% }) %>
-                    </ul> 
+                    </ul>
                 <% } else { %>
-					<p class="empty_items"> راهنمایی نخواستید! </p> 
+					<p class="empty_items"> راهنمایی نخواستید! </p>
 				<% } %>
             </div>
             <form action="/maze/puzzles/<%= mazePuzzle.id %>/hint" method="post">
@@ -99,7 +82,7 @@
                     کد راهنمایی : <input name="code">
                 </div>
                 <div class="hint_message">
-                    <p> متن سوال : </p> 
+                    <p> متن سوال : </p>
                     <textarea spellcheck="false" name="question" rows="3" cols="30"> </textarea>
                 </div>
                 <button type="submit" class="answer_submit">

@@ -6,8 +6,13 @@ const MazePuzzle = require('./mazePuzzle');
 const Schema = mongoose.Schema;
 
 const profileSchema = new Schema({
+  idx: {
+    type: Number,
+    default: Math.floor(Math.random() * 100)
+  },
   stage: {
-    type: Number
+    type: Number,
+    default: 0
   },
   user: {
     type: String,

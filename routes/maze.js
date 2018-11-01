@@ -41,8 +41,8 @@ function getMaximumHintStepOfPuzzle(mazePuzzleId, profileId) {
   return new Promise((resolve, reject) => {
     HintCode.aggregate([{
       $match: {
-        mazePuzzle: mazePuzzleId,
-        profile: profileId
+        profile: profileId,
+        mazePuzzle: mazePuzzleId
       }
     }, {
       $group: {
@@ -53,7 +53,6 @@ function getMaximumHintStepOfPuzzle(mazePuzzleId, profileId) {
       }
     }
     ], (err, data) => {
-      console.log(data);
       if (!data || !data[0])
         return resolve(0);
       return resolve(data[0].step);
@@ -64,18 +63,19 @@ function getMaximumHintStepOfPuzzle(mazePuzzleId, profileId) {
 app.get('/puzzles/:puzzleId', async(req, res) => {
   const profile = req.profile;
   let status = 'viewed';
-  let mazePuzzle = req.profile.viewedPuzzles.find(p => p.id === req.params.puzzleId);
+  const mazePuzzleId = req.params.puzzleId;
+  let mazePuzzle = req.profile.viewedPuzzles.find(p => p.id === mazePuzzleId);
   if (mazePuzzle) {
     if (await profile.hasSolved(mazePuzzle))
       status = 'solved';
     let answers = await profile.getAnswers(mazePuzzle);
-    let clue = {};
-    if (mazePuzzle.nextPuzzle.clues.length > 0)
-      clue = mazePuzzle.nextPuzzle.clues[0 % mazePuzzle.nextPuzzle.clues.length];
-    //console.log(await getMaximumHintStepOfPuzzle(mazePuzzle._id, profile._id));
-    const hints = [];
+    let nextPuzzleClue = {};
+    if (mazePuzzle.nextPuzzle && mazePuzzle.nextPuzzle.clues.length > 0)
+      nextPuzzleClue = mazePuzzle.nextPuzzle.clues[profile.idx % mazePuzzle.nextPuzzle.clues.length];
+    let hintStep = await getMaximumHintStepOfPuzzle(mazePuzzle._id, profile._id);
+    const hints = mazePuzzle.puzzle.hints.slice(0, Math.min(mazePuzzle.puzzle.hints.length, hintStep));
     return res.render('maze/puzzle', {
-      mazePuzzle, hints, answers, status, clue
+      mazePuzzle, hints, answers, status, nextPuzzleClue
     });
   } else {
     mazePuzzle = await MazePuzzle.findById(req.params.puzzleId).populate('puzzle');
@@ -93,32 +93,7 @@ app.get('/clues/:clueId', async(req, res, next) => {
   let clue = await Clue.findById(req.params.clueId);
   if (!clue.mazePuzzle)
     return res.sendStatus(404);
-  const profile = req.profile;
-  let status = 'viewed';
-  const mazePuzzleId = clue.mazePuzzle;
-  let mazePuzzle = req.profile.viewedPuzzles.find(p => p.id === mazePuzzleId);
-  if (mazePuzzle) {
-    if (await profile.hasSolved(mazePuzzle))
-      status = 'solved';
-    let answers = await profile.getAnswers(mazePuzzle);
-    let nextPuzzleClue = {};
-    if (mazePuzzle.nextPuzzle.clues.length > 0)
-      nextPuzzleClue = mazePuzzle.nextPuzzle.clues[0 % mazePuzzle.nextPuzzle.clues.length];
-    console.log(await getMaximumHintStepOfPuzzle(mazePuzzle._id, profile._id));
-    const hints = [];
-    return res.render('maze/puzzle', {
-      mazePuzzle, hints, answers, status, nextPuzzleClue
-    });
-  } else {
-    mazePuzzle = await MazePuzzle.findById(clue.mazePuzzle).populate('puzzle');
-    if (!mazePuzzle)
-      return res.sendStatus(404);
-    if (!await profile.viewPuzzle(mazePuzzle))
-      return res.render('common/error', { error: { message: 'You have to solve prerequisites of this puzzle first!' } });
-    return res.render('maze/puzzle', {
-      mazePuzzle, hints: [], answers: [], status
-    });
-  }
+  return res.redirect(`/maze/puzzles/${clue.mazePuzzle}`);
 });
 
 app.post('/puzzles/:puzzleId/answer', async(req, res) => {
@@ -137,11 +112,12 @@ app.post('/puzzles/:puzzleId/hint', async(req, res) => {
   const hint = await HintCode.findOne({ code });
   if (!hint)
     return res.render('common/error', { error: { message: 'Hint code is invalid!' } });
-  if (hint.step !== -1)
+  if (hint.step !== 0)
     return res.render('common/error', { error: { message: 'Hint code has been already used!' } });
   hint.mazePuzzle = req.params.puzzleId;
   hint.profile = req.profile;
-  hint.step = await getMaximumHintStepOfPuzzle(req.params.puzzleId, req.profile._id) + 1;
+  let mazePuzzle = await MazePuzzle.findById(req.params.puzzleId);
+  hint.step = await getMaximumHintStepOfPuzzle(mazePuzzle._id, req.profile._id) + 1;
   await hint.save();
   res.redirect(`/maze/puzzles/${req.params.puzzleId}`);
 });

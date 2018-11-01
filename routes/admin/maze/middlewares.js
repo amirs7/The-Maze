@@ -11,9 +11,9 @@ async function findMaze(req, res, next) {
 async function findMazePuzzle(req, res, next, id) {
   req.mazePuzzle = await MazePuzzle.findById(id)
     .populate({
-    path: 'prerequisites',
-    populate: { path: 'puzzle' }
-  })
+      path: 'prerequisites',
+      populate: { path: 'puzzle' }
+    })
     .populate({
       path: 'nextPuzzle',
       populate: { path: 'puzzle' }
@@ -38,7 +38,9 @@ async function addPuzzle(req, res) {
 async function showPuzzle(req, res) {
   const mazePuzzle = req.mazePuzzle;
   const mazePuzzles = req.maze.puzzles;
-  const clues = await Clue.find({ _id: { $nin: mazePuzzle.clues } });
+  let clues = {};
+  if (mazePuzzle)
+    clues = await Clue.find({ _id: { $nin: mazePuzzle.clues } });
   res.render('admin/maze/puzzles/show', { mazePuzzle, mazePuzzles, clues });
 }
 

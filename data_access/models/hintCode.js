@@ -17,7 +17,7 @@ const hintCodeSchema = new Schema({
   },
   step: {
     type: Number,
-    default: -1
+    default: 0
   }
 });
 
