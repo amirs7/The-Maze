@@ -14,12 +14,16 @@ const mazePuzzleSchema = new Schema({
   qrImage: {
     type: String
   },
-  feedbacks: [
+  clues: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Feedback'
+      ref: 'Clue'
     }
   ],
+  nextPuzzle: {
+    type: Schema.Types.ObjectId,
+    ref: 'MazePuzzle'
+  },
   prerequisites: [
     {
       type: Schema.Types.ObjectId,

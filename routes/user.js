@@ -69,6 +69,7 @@ app.post('/signup', async(req, res, next) => {
 });
 
 app.get('/verify/:token', async function(req, res, next) {
+  return res.sendStatus(404);
   let userData = jwt.verify(req.params.token, config.jwtSecret);
   let user = await User.findOne({ _id: userData.username });
   if (user)

@@ -14,7 +14,7 @@ app.use(passport.isAuthenticated);
 app.use(async(req, res, next) => {
   const user = req.user;
   req.profile = await Profile.findUserProfile(user);
-  if(!req.profile)
+  if (!req.profile)
     return res.redirect('/maze');
   next();
 });
@@ -29,13 +29,12 @@ app.get('/leaderboard', async(req, res, next) => {
 });
 
 app.get('/', (req, res, next) => {
-  //let mazePuzzles = [];
-  //if(req.profile)
-  //  mazePuzzles = req.profile.viewedPuzzles;
-  //else
-  //  return res.redirect('/user/login');
-  //res.render('maze/puzzlesList', { mazePuzzles });
-  res.render('landing');
+  let mazePuzzles = [];
+  if (req.profile)
+    mazePuzzles = req.profile.viewedPuzzles;
+  else
+    return res.redirect('/user/login');
+  res.render('maze/puzzlesList', { mazePuzzles });
 });
 
 app.get('/puzzles/:puzzleId', async(req, res) => {
@@ -47,8 +46,11 @@ app.get('/puzzles/:puzzleId', async(req, res) => {
       status = 'solved';
     let answers = await profile.getAnswers(mazePuzzle);
     const hints = await Hint.find({ mazePuzzle, profile });
+    let clue = {};
+    if (mazePuzzle.nextPuzzle.clues.length > 0)
+      clue = mazePuzzle.nextPuzzle.clues[0 % mazePuzzle.nextPuzzle.clues.length];
     return res.render('maze/puzzle', {
-      mazePuzzle, hints, answers, status
+      mazePuzzle, hints, answers, status, clue
     });
   } else {
     mazePuzzle = await MazePuzzle.findById(req.params.puzzleId).populate('puzzle');
@@ -57,7 +59,7 @@ app.get('/puzzles/:puzzleId', async(req, res) => {
     if (!await profile.viewPuzzle(mazePuzzle))
       return res.render('common/error', { error: { message: 'You have to solve prerequisites of this puzzle first!' } });
     return res.render('maze/puzzle', {
-      mazePuzzle, hints:[], answers: [], status
+      mazePuzzle, hints: [], answers: [], status
     });
   }
 });

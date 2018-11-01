@@ -1,0 +1,20 @@
+<head>
+    <title>
+        Clues
+    </title>
+</head>
+<body>
+<h1>Clues List</h1>
+<div>
+    <a href="/admin/maze/clue/new">New</a>
+    <ol>
+        <% clues.forEach(function(clue) { %>
+        <li>
+            <a href="/admin/maze/clue/<%= clue.id %>">
+                <%= clue.name %>
+            </a>
+        </li>
+        <% }) %>
+    </ol>
+</div>
+</body>
