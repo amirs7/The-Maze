@@ -53,6 +53,9 @@ async function addPrerequisite(req, res) {
 
 async function addClue(req, res) {
   const mazePuzzle = req.mazePuzzle;
+  let clue = await Clue.findById(req.body.clueId);
+  clue.mazePuzzle = mazePuzzle;
+  await clue.save();
   mazePuzzle.clues.addToSet(req.body.clueId);
   await mazePuzzle.save();
   res.redirect(`/admin/maze/puzzles/${mazePuzzle.id}`);

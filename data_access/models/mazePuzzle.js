@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const QRCode = require('qrcode');
 
 const config = require('../../config');
 
@@ -10,9 +9,6 @@ const mazePuzzleSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Puzzle',
     required: true
-  },
-  qrImage: {
-    type: String
   },
   clues: [
     {
@@ -46,13 +42,12 @@ mazePuzzleSchema.pre('remove', async function(next) {
   next();
 });
 
-mazePuzzleSchema.pre('save', async function(next) {
-  let mazePuzzle = this;
-  if (!mazePuzzle.isModified('puzzle')) return next();
-  let mazePuzzleURL = `${config.hostname}/maze/puzzles/${mazePuzzle.id}`;
-  console.log(mazePuzzleURL);
-  mazePuzzle.qrImage = await QRCode.toDataURL(mazePuzzleURL, { errorCorrectionLevel: 'L', version: 4, maskPattern: 7 });
-  next();
-});
+//mazePuzzleSchema.pre('save', async function(next) {
+//  let mazePuzzle = this;
+//  if (!mazePuzzle.isModified('puzzle')) return next();
+//  let mazePuzzleURL = `${config.hostname}/maze/puzzles/${mazePuzzle.id}`;
+//  mazePuzzle.qrImage = await QRCode.toDataURL(mazePuzzleURL, { errorCorrectionLevel: 'L', version: 4, maskPattern: 7 });
+//  next();
+//});
 
 module.exports = mongoose.model('MazePuzzle', mazePuzzleSchema);
