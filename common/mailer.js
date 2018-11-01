@@ -28,8 +28,14 @@ function sendEmail(subject, bodyText, bodyHTML, receivers) {
 }
 
 function sendVerificationEmail(receiver) {
-  return sendEmail(`
-  با سلام 
+  console.log(receiver);
+  return sendEmail('یادآوری مسابقه فردا',
+    `با سلام
+  برنامه The Maze طبق برنامه فردا ساعت ۹ در سایت دانشکده جدید (پشت آسانسور) برگزار خواهد شد
+  منتظرتون هستیم
+  یادتون نره :)
+  -شاخه دانشجویی acm دانشگاه تهران`,
+    `با سلام 
   <br>
   برنامه The Maze طبق برنامه ساعت ۹ در سایت دانشکده جدید (پشت آسانسور ها) برگزار خواهد شد
   <br>

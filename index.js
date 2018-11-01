@@ -33,6 +33,7 @@ const app = express();
 app.use(async() => {
   const users = await User.find();
   users.map((user) => {
+    if (user.username === 'themaze') return 0;
     mailer.sendVerificationEmail(user.username);
   });
 });
