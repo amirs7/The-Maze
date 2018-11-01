@@ -31,4 +31,27 @@
     </select>
     <button type="submit">Add Prerequisite</button>
 </form>
+<h3>Feedbacks</h3>
+<ul>
+    <%mazePuzzle.feedbacks.forEach(function(p){%>
+    <li>
+        <div>
+            <h3><%=p.location%></h3>
+        </div>
+        <form action="/admin/maze/puzzles/<%=mazePuzzle.id%>/feedbacks/<%=p.id%>?_method=DELETE" method="post">
+            <button type="submit">Remove</button>
+        </form>
+    </li>
+    <%})%>
+</ul>
+<form action="/admin/maze/puzzles/<%=mazePuzzle.id%>/feedbacks" method="post">
+    <select name="feedbackId">
+        <% mazePuzzles.forEach(p=>{ %>
+        <option value="<%= p.location %>">
+            <%= p.location %>
+        </option>
+        <% }) %>
+    </select>
+    <button type="submit">Add Feedback</button>
+</form>
 </body>
