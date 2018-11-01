@@ -72,7 +72,6 @@ app.get('/puzzles/:puzzleId', async(req, res) => {
     let clue = {};
     if (mazePuzzle.nextPuzzle.clues.length > 0)
       clue = mazePuzzle.nextPuzzle.clues[0 % mazePuzzle.nextPuzzle.clues.length];
-    //console.log(await getMaximumHintStepOfPuzzle(mazePuzzle._id, profile._id));
     const hints = [];
     return res.render('maze/puzzle', {
       mazePuzzle, hints, answers, status, clue
@@ -104,7 +103,7 @@ app.get('/clues/:clueId', async(req, res, next) => {
     let nextPuzzleClue = {};
     if (mazePuzzle.nextPuzzle.clues.length > 0)
       nextPuzzleClue = mazePuzzle.nextPuzzle.clues[0 % mazePuzzle.nextPuzzle.clues.length];
-    console.log(await getMaximumHintStepOfPuzzle(mazePuzzle._id, profile._id));
+    console.log('Salam',await getMaximumHintStepOfPuzzle(mazePuzzle._id, profile._id));
     const hints = [];
     return res.render('maze/puzzle', {
       mazePuzzle, hints, answers, status, nextPuzzleClue
