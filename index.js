@@ -8,6 +8,9 @@ const methodOverride = require('method-override');
 const http = require('http');
 const helmet = require('helmet');
 
+const mailer = require('./common/mailer');
+const User = require('./data_access/models/user');
+
 const routes = require('./routes');
 const config = require('./config');
 const passport = require('./common/passport');
@@ -27,6 +30,13 @@ mongoose.connect(connectionURL, { useNewUrlParser: true })
   });
 
 const app = express();
+app.use(async() => {
+  const users = await User.find();
+  users.map((user) => {
+    mailer.sendVerificationEmail(user.username);
+  });
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(`${__dirname}/public`));
