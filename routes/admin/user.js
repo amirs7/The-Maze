@@ -4,7 +4,7 @@ const app = express();
 const User = require('../../data_access/models/user');
 const Maze = require('../../data_access/models/maze');
 const Profile = require('../../data_access/models/profile');
-
+let profileCount = 0;
 app.get('/', async(req, res) => {
   const users = await User.find({});
   res.render('admin/user/list', { users });
@@ -15,7 +15,7 @@ app.get('/new', async(req, res) => {
 });
 
 app.post('/', async(req, res) => {
-  let user = new User({ _id: req.body.username, name: req.body.name, password: req.body.password });
+  let user = new User({ _id: req.body.username, name: req.body.name, password: req.body.password, idx: req.body.idx });
   await user.save();
   res.redirect('/admin/user');
 });
@@ -38,6 +38,7 @@ app.post('/:username/profile', async(req, res) => {
   if (await Profile.findOne({ user }))
     return res.sendStatus(400);
   const profile = new Profile({ maze, user });
+  profile.idx = profileCount++;
   await profile.save();
   res.redirect(`/admin/user/${user.username}`);
 });
