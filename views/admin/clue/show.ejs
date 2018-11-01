@@ -1,0 +1,23 @@
+<head>
+    <title>
+        Clue
+    </title>
+</head>
+<body>
+<h1>Clue</h1>
+<div style="border-style: solid;border-width: thick;">
+    <h2> <%=clue.locationIndex%></h2>
+    <div>
+        <%-clue.html%>
+    </div>
+</div>
+<form action="<%=clue.id%>?_method=PUT" method="post">
+    <input name="locationIndex" placeholder="locationIndex" value="<%=clue.locationIndex%>">
+    <input name="name" placeholder="name" value="<%=clue.name%>">
+    <textarea name="html" placeholder="html"><%=clue.html%></textarea>
+    <button type="submit">Update</button>
+</form>
+<form action="<%=clue.id%>?_method=DELETE" method="post">
+    <button type="submit">Delete</button>
+</form>
+</body>

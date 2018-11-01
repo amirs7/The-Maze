@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Puzzle = require('../../data_access/models/puzzle');
+const Clue = require('../../data_access/models/clue');
 const logger = require('../../common').logger;
 
 const app = express();
@@ -40,7 +41,7 @@ app.param('puzzleId', async(req, res, next, id) => {
   }
 });
 
-app.get('/:puzzleId', (req, res) => {
+app.get('/:puzzleId', async(req, res) => {
   const puzzle = req.puzzle;
   if (!puzzle) return res.sendStatus(404);
   return res.render('admin/puzzle/show', { puzzle });

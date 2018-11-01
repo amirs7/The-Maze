@@ -31,4 +31,43 @@
     </select>
     <button type="submit">Add Prerequisite</button>
 </form>
+<h3>Clues</h3>
+<ul>
+    <%mazePuzzle.clues.forEach(function(c){%>
+    <li>
+        <div>
+            <a href="/admin/maze/clue/<%=c.id%>"> <%=c.name%></a>
+        </div>
+        <form action="/admin/maze/puzzles/<%=mazePuzzle.id%>/clues/<%=c.id%>?_method=DELETE" method="post">
+            <button type="submit">Remove</button>
+        </form>
+    </li>
+    <%})%>
+</ul>
+<form action="/admin/maze/puzzles/<%=mazePuzzle.id%>/clues" method="post">
+    <select name="clueId">
+        <% clues.forEach(c=>{ %>
+        <option value="<%= c.id %>">
+            <%= c.name %>
+        </option>
+        <% }) %>
+    </select>
+    <button type="submit">Add Clue</button>
+</form>
+
+<%if(mazePuzzle.nextPuzzle){%>
+    <div>
+        <h3><a href="/admin/maze/puzzles/<%=mazePuzzle.nextPuzzle.id%>"><%=mazePuzzle.nextPuzzle.title%><a/></h3>
+    </div>
+<%}%>
+<form action="/admin/maze/puzzles/<%=mazePuzzle.id%>/nextPuzzle" method="post">
+    <select name="nextPuzzleId">
+        <% mazePuzzles.forEach(p=>{ %>
+        <option value="<%= p.id %>">
+            <%= p.title %>
+        </option>
+        <% }) %>
+    </select>
+    <button type="submit">Set Next Puzzle</button>
+</form>
 </body>

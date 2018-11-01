@@ -4,7 +4,7 @@
     </title>
 </head>
 <body>
-<h1>Show</h1>
+<h1>Puzzle</h1>
 <div style="border-style: solid;border-width: thick;">
     <h2> <%=puzzle.title%></h2>
     <div>
@@ -20,7 +20,6 @@
     <input name="title" placeholder="title" value="<%=puzzle.title%>">
     <input name="level" placeholder="level" value="<%=puzzle.level%>">
     <textarea name="description" placeholder="description"><%=puzzle.description%></textarea>
-    <textarea name="feedback" placeholder="feedback"><%=puzzle.feedback%></textarea>
     <textarea name="solution" placeholder="solution"><%=puzzle.solution%></textarea>
     <br>
     <%for(var i=0; i < puzzle.level; i++){ %>
