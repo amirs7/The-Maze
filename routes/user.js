@@ -27,7 +27,7 @@ app.post('/login',
     user.ip = req.ip;
     await user.save();
     res.cookie('username', user.username);
-    res.redirect('/home');
+    res.redirect('/maze');
   });
 
 app.get('/signup', (req, res, next) => {
