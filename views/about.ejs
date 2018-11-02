@@ -1,92 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title> The Maze </title>
-    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 800px)" href="/stylesheets/aboutUs-mobile.css" />
-    <link rel="stylesheet" type="text/css" media="screen and (min-device-width: 800px)" href="/stylesheets/aboutUs.css" />
-    <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha21/dist/font-face.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <title>fullPage.js - Base example</title>
+  <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 800px)" href="/stylesheets/aboutUs-mobile.css" />
+  <link rel="stylesheet" type="text/css" media="screen and (min-device-width: 400px)" href="/stylesheets/aboutUs.css" />
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha21/dist/font-face.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+
+  <link rel='stylesheet' href='https://rawgit.com/alvarotrigo/fullPage.js/dev/src/fullpage.css'>
+
+  <link rel="stylesheet" href="css/style.css">
+
+
 </head>
 
 <body>
-    <div class="maze_image">
-        <img class="images" src="/images/maze_pic.jpg">
+  <div id="fullpage" class="page_container">
+    <div class="section image-text">
+      <img src="/images/maze_pic.jpg" class="maze-icon">
+      <div class="text-parts">
+        <p>
+          ۸ سالی می‌شه که هرساله توسط
+          <a href="http://acm.ut.ac.ir/acm">
+            انجمن علمی مهندسی کامپیوتر (شاخه‌ی دانشجویی ACM)
+          </a>
+          ،
+          مسابقه‌ای ویژه‌ی ورودی‌های جدید دانشکده برگزار می‌شه که هدف اون، آشنایی ورودی‌ها با هم‌دیگه،
+          سال‌بالایی‌ها،
+          شاخه‌ی دانشجویی ACM و جو کلی دانشکده‌ست.
+        </p>
+      </div>
+      <img class="images" src='/images/aboutUs_1.jpg'>
     </div>
-    <div class="page_container">
-        <h1> The Maze </h1>
-        <div class="text-parts">
-            <p>
-                ۸ سالی می‌شه که هرساله توسط
-                <a href="http://acm.ut.ac.ir/acm">
-                    انجمن علمی مهندسی کامپیوتر (شاخه‌ی دانشجویی ACM)
-                </a>
-                ،
-                مسابقه‌ای ویژه‌ی ورودی‌های جدید دانشکده برگزار می‌شه که هدف اون، آشنایی ورودی‌ها با هم‌دیگه،
-                سال‌بالایی‌ها،
-                شاخه‌ی دانشجویی ACM و جو کلی دانشکده‌ست.
-            </p>
-        </div>
-        <img class="images" src='/images/aboutUs_1.jpg'>
-        <div class="text-parts">
-            <p>
-                برگزاری این مسابقه‌ها با
-                <a href="http://acm.ut.ac.ir/acm/posts/152">
-                    «مسابقه‌ی هوش مصنوعی»
-                </a>
-                و از سال ۱۳۹۰ شروع شد که بچه‌ها به کمک سال‌بالاییاشون، عامل‌های هوش مصنوعی می‌ساختن و در نهایت بین
-                این
-                عامل‌ها مسابقه‌ای برگزار می‌شد.
-            </p>
-        </div>
-        <img class="images" src='/images/aboutUs_2.jpg'>
-        <div class="text-parts">
-            <p>
-                بعد از اون و از سال ۱۳۹۴، بچه‌های شاخه تصمیم به تغییر مسابقه با نام جدید
-                <a href="http://acm.ut.ac.ir/acm/posts/171">
-                    «XP Game»
-                </a>
-                گرفتن و طی اون، ورودی‌ها با کمک هم‌دیگه و با راهنمایی‌های سال‌بالایی‌هاشون، مسئله‌های پیشِ روشون رو
-                حل
-                می‌کردن.
-            </p>
-        </div>
-        <img class="images" src="/images/aboutUs_3.jpg">
-        <div class="text-parts">
-            <p>
-                از امسال و با ایده‌گرفتن از مسابقه‌ی
-                <a href="http://www.mit.edu/~puzzle/">
-                    MIT Mystery Hunt
-                </a>
-                ، مسابقه‌ی ویژه‌ی ورودی‌ها تحت عنوان
-                <a href="https://themaze.ir">
-                    The Maze
-                </a>
-                قراره برگزار بشه.
-                <a href="https://themaze.ir">
-                    The Maze
-                </a>
-                یک مسابقه‌ی محیطیه که بچه‌ها به تیم‌هایی تقسیم می‌شن و در کنار مربی‌شون که از سال‌بالایی‌هاشونه،
-                باید
-                معماهایی رو که در محیط دانشگاه (پردیس ۲ دانشکده‌های فنی) مخفی شده رو پیدا و حل کنن. البته! حواستون
-                باشه حل
-                این معماها به این آسونی‌ها نیست :)
-            </p>
-        </div>
-        <img class="images" src="/images/aboutUs_4.jpg" class="maze_pic">
-        <div class="text-parts">
-            <p>
-                اولین دوره از The Maze روز پنج‌شنبه ۱۰ آبان‌ماه از ساعت ۹ صبح الی ۱۸ در پردیس ۲ دانشکده‌های فنی دانشگاه
-                تهران برگزار می‌شه. جوایز ارزنده‌ای هم برای تیمِ برنده‌ی مسابقه درنظر گرفته شده!
-                <br> <br>
-                گفتنیه که ثبت‌نام به صورت فردیه و گروه بندی در روز مسابقه انجام می‌شه.
-                <br> <br>
-                برای شرکت در مسابقه‌ی امسال از طریق
-                <a href="https://themaze.ir">
-                    این لینک
-                </a>
-                می تونین ثبت نام کنین!
-                <br> <br>
-                به زودی می بینیمتون ;)
-            </p>
-        </div>
+    <div class="section image-text">
+      <div class="text-parts">
+        <p>
+          برگزاری این مسابقه‌ها با
+          <a href="http://acm.ut.ac.ir/acm/posts/152">
+            «مسابقه‌ی هوش مصنوعی»
+          </a>
+          و از سال ۱۳۹۰ شروع شد که بچه‌ها به کمک سال‌بالاییاشون، عامل‌های هوش مصنوعی می‌ساختن و در نهایت بین
+          این
+          عامل‌ها مسابقه‌ای برگزار می‌شد.
+        </p>
+      </div>
+      <img class="images" src='/images/aboutUs_2.jpg'>
+    </div>
+    <div class="section image-text">
+      <div class="text-parts">
+        <p>
+          بعد از اون و از سال ۱۳۹۴، بچه‌های شاخه تصمیم به تغییر مسابقه با نام جدید
+          <a href="http://acm.ut.ac.ir/acm/posts/171">
+            «XP Games»
+          </a>
+          گرفتن و طی اون، ورودی‌ها با کمک هم‌دیگه و با راهنمایی‌های سال‌بالایی‌هاشون، مسئله‌های پیشِ روشون رو
+          حل
+          می‌کردن.
+        </p>
+      </div>
+      <img class="images" src="/images/aboutUs_3.jpg">
+    </div>
+    <div class="section image-text">
+      <div class="text-parts invitation">
+        <p>
+          از امسال و با ایده‌گرفتن از مسابقه‌ی
+          <a href="http://www.mit.edu/~puzzle/">
+            MIT Mystery Hunt
+          </a>
+          ، مسابقه‌ی ویژه‌ی ورودی‌ها تحت عنوان
+          <a href="https://themaze.ir">
+            The Maze
+          </a>
+          قراره برگزار بشه.
+          <a href="https://themaze.ir">
+            The Maze
+          </a>
+          یک مسابقه‌ی محیطیه که بچه‌ها به تیم‌هایی تقسیم می‌شن و در کنار مربی‌شون که از سال‌بالایی‌هاشونه،
+          باید
+          معماهایی رو که در محیط دانشگاه (پردیس ۲ دانشکده‌های فنی) مخفی شده رو پیدا و حل کنن. البته! حواستون
+          باشه حل
+          این معماها به این آسونی‌ها نیست :)
+        </p>
 
+
+        <p>
+          اولین دوره از The Maze روز جمعه ۱۱ آبان‌ماه از ساعت ۹ صبح الی ۱۸ در پردیس ۲ دانشکده‌های فنی
+          دانشگاه
+          تهران برگزار می‌شه. جوایز ارزنده‌ای هم برای تیمِ برنده‌ی مسابقه درنظر گرفته شده!
+          <br> <br>
+          گفتنیه که ثبت‌نام به صورت فردیه و گروه بندی در روز مسابقه انجام می‌شه.
+          <br> <br>
+          برای شرکت در مسابقه‌ی امسال از طریق
+          <a href="https://themaze.ir">
+            این لینک
+          </a>
+          می تونین ثبت نام کنین!
+          <br> <br>
+          به زودی می بینیمتون ;)
+        </p>
+      </div>
+      <img class="images" src="/images/Card-Final.jpg">
     </div>
+  </div>
+  <script src='https://rawgit.com/alvarotrigo/fullPage.js/dev/src/fullpage.js'></script>
+
+
+
+  <script src="js/index.js"></script>
+
+
+
+
 </body>
+
+</html>

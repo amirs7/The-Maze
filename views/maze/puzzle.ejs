@@ -31,7 +31,15 @@
         <p> مشخصات پازل بعدی </p>
     </div>
     <div class="section_body feedback">
-        <%-mazePuzzle.puzzle.feedback%>
+        <div>
+            <%- mazePuzzle.puzzle.feedback%>
+        </div>
+        <div>
+            <p>ناحیه:
+                <%=nextPuzzleClue.locationIndex%>
+            </p>
+            <%-nextPuzzleClue.html%>
+        </div>
     </div>
     <% }else{ %>
     <div class="section_head">
@@ -61,33 +69,18 @@
         <p> کمک بگیرید ! </p>
     </div>
     <div class="hints">
+        <h5>راهنمایی ها:</h5>
         <div class="item_container">
-            <% if (hints.length>0) { %>
+            <% if (hints) { %>
             <ul>
-                <% hints.forEach(function(hint) { %>
-                <li>
-                    <% if (hint.answer) { %>
-                    <p style="color: green" onclick="openDetail('<%=hint.code%>')">
-                        <%= hint.code %>
+                <% hints.forEach(function(hint, i) { %>
+                <div class="hint_detail">
+                    <p>
+                        <%=i+1%>
                     </p>
-                    <% } else { %>
-                    <p style="color: blue" onclick="openDetail('<%=hint.code%>')">
-                        <%= hint.code %>
+                    <p>
+                        <%=hint%>
                     </p>
-                    <% } %>
-                </li>
-                <div id="detail<%=hint.code%>" class="hint_detail_container">
-                    <div class="hint_detail">
-                        <p> متن سوال : </p>
-                        <textarea spellcheck="false" rows="2" cols="20"><%=hint.question%>
-                                    </textarea>
-                    </div>
-                    <div class="hint_detail hint_answer">
-                        <p> پاسخ : </p>
-                        <textarea spellcheck="false" rows="2" cols="20"><% if (hint.answer) { %> <%=hint.answer%>
-                                        <% } else { %>منتظر پاسخ بمانید!<% } %>
-                                    </textarea>
-                    </div>
                 </div>
                 <% }) %>
             </ul>
@@ -142,15 +135,4 @@
     <li>
         <div>
             <p>Code:<%= hint.code %></p>
-            <textarea disabled><%= hint.question %></textarea>
-            <textarea disabled><%= hint.answer %></textarea>
-        </div>
-    </li>
-    <% }) %>
-</ul>
-<form action="/maze/puzzles/<%= mazePuzzle.id %>/hint" method="post">
-    <input name="code" placeholder="Hint Code">
-    <textarea name="question" placeholder="Type your question here"></textarea>
-    <button type="submit">Request Hint</button>
-</form>
-<% } %> -->
+            <textarea disabled><%= hint.question %>

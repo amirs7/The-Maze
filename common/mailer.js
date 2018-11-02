@@ -27,10 +27,24 @@ function sendEmail(subject, bodyText, bodyHTML, receivers) {
   });
 }
 
-function sendVerificationEmail(link, receiver) {
-  return sendEmail('The Maze Signup Verification',
-    `Click this link to verify your registration:\n ${link}`,
-    `<b>Click <a href="${link}">here</a> to verify your registration</b>`,
+function sendVerificationEmail(receiver) {
+  console.log(receiver);
+  return sendEmail('یادآوری مسابقه فردا',
+    `با سلام
+  برنامه The Maze طبق برنامه فردا ساعت ۹ در سایت دانشکده جدید (پشت آسانسور) برگزار خواهد شد
+  منتظرتون هستیم
+  یادتون نره :)
+  -شاخه دانشجویی acm دانشگاه تهران`,
+    `با سلام 
+  <br>
+  برنامه The Maze طبق برنامه ساعت ۹ در سایت دانشکده جدید (پشت آسانسور ها) برگزار خواهد شد
+  <br>
+  منتظرتون هستیم
+  <br>
+  یادتون نره :)
+  <br>
+  -شاخه دانشجویی acm دانشگاه تهران
+  `,
     [receiver]);
 }
 

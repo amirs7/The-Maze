@@ -11,15 +11,20 @@ const puzzleSchema = new Schema({
     type: String,
     required: true
   },
+  feedback: {
+    type: String,
+  },
   solution: {
     type: String
   },
+  level: {
+    type: Number,
+    default: 0
+  },
+  hints: [String],
   checkingType: {
     enum: ['online', 'offline'],
     default: 'online',
-    type: String
-  },
-  feedback: {
     type: String
   }
 });

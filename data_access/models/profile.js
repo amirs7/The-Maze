@@ -6,8 +6,13 @@ const MazePuzzle = require('./mazePuzzle');
 const Schema = mongoose.Schema;
 
 const profileSchema = new Schema({
+  idx: {
+    type: Number,
+    default: Math.floor(Math.random() * 100)
+  },
   stage: {
-    type: Number
+    type: Number,
+    default: 0
   },
   user: {
     type: String,
@@ -91,7 +96,7 @@ profileSchema.methods.getAnswers = function(mazePuzzle) {
           _id: {
             $in: profile.answers
           },
-          mazePuzzle: mazePuzzle._id,
+          mazePuzzle: mazePuzzle._id
         }
       }
     ]);
@@ -122,6 +127,7 @@ profileSchema.statics.findUserProfile = function(user) {
   return new Promise(async(resolve, reject) => {
     const profile = await Profile.findOne({ user }).populate('maze')
       .populate({ path: 'viewedPuzzles', populate: { path: 'puzzle' } })
+      .populate({ path: 'viewedPuzzles', populate: { path: 'nextPuzzle', populate: { path: 'clues' } } })
       .populate('answers');
     resolve(profile);
   });

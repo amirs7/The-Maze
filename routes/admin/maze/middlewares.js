@@ -1,6 +1,7 @@
 const Maze = require('../../../data_access/models/maze');
 const MazePuzzle = require('../../../data_access/models/mazePuzzle');
 const Puzzle = require('../../../data_access/models/puzzle');
+const Clue = require('../../../data_access/models/clue');
 
 async function findMaze(req, res, next) {
   req.maze = await Maze.getInstance();
@@ -8,10 +9,16 @@ async function findMaze(req, res, next) {
 }
 
 async function findMazePuzzle(req, res, next, id) {
-  req.mazePuzzle = await MazePuzzle.findById(id).populate({
-    path: 'prerequisites',
-    populate: { path: 'puzzle' }
-  }).populate('puzzle');
+  req.mazePuzzle = await MazePuzzle.findById(id)
+    .populate({
+      path: 'prerequisites',
+      populate: { path: 'puzzle' }
+    })
+    .populate({
+      path: 'nextPuzzle',
+      populate: { path: 'puzzle' }
+    })
+    .populate('puzzle').populate('clues');
   next();
 }
 
@@ -28,12 +35,13 @@ async function addPuzzle(req, res) {
   res.redirect('/admin/maze');
 }
 
-
-
 async function showPuzzle(req, res) {
   const mazePuzzle = req.mazePuzzle;
   const mazePuzzles = req.maze.puzzles;
-  res.render('admin/maze/puzzles/show', { mazePuzzle, mazePuzzles });
+  let clues = {};
+  if (mazePuzzle)
+    clues = await Clue.find({ _id: { $nin: mazePuzzle.clues } });
+  res.render('admin/maze/puzzles/show', { mazePuzzle, mazePuzzles, clues });
 }
 
 async function addPrerequisite(req, res) {
@@ -45,9 +53,35 @@ async function addPrerequisite(req, res) {
   res.redirect(`/admin/maze/puzzles/${mazePuzzle.id}`);
 }
 
+async function addClue(req, res) {
+  const mazePuzzle = req.mazePuzzle;
+  let clue = await Clue.findById(req.body.clueId);
+  clue.mazePuzzle = mazePuzzle;
+  await clue.save();
+  mazePuzzle.clues.addToSet(req.body.clueId);
+  await mazePuzzle.save();
+  res.redirect(`/admin/maze/puzzles/${mazePuzzle.id}`);
+}
+
+async function setNextPuzzle(req, res) {
+  const mazePuzzle = req.mazePuzzle;
+  const nextPuzzle = await MazePuzzle.findById(req.body.nextPuzzleId);
+  if (nextPuzzle)
+    mazePuzzle.nextPuzzle = nextPuzzle;
+  await mazePuzzle.save();
+  res.redirect(`/admin/maze/puzzles/${mazePuzzle.id}`);
+}
+
 async function removePrerequisite(req, res) {
   const mazePuzzle = req.mazePuzzle;
   mazePuzzle.prerequisites.remove(req.params.prerequisiteId);
+  await mazePuzzle.save();
+  res.redirect(`/admin/maze/puzzles/${mazePuzzle.id}`);
+}
+
+async function removeClue(req, res) {
+  const mazePuzzle = req.mazePuzzle;
+  mazePuzzle.clues.remove(req.params.clueId);
   await mazePuzzle.save();
   res.redirect(`/admin/maze/puzzles/${mazePuzzle.id}`);
 }
@@ -62,5 +96,15 @@ async function removePuzzle(req, res) {
 }
 
 module.exports = {
-  findMaze, findMazePuzzle, index, addPuzzle, showPuzzle, removePuzzle, addPrerequisite, removePrerequisite
+  findMaze,
+  findMazePuzzle,
+  index,
+  addPuzzle,
+  showPuzzle,
+  removePuzzle,
+  addPrerequisite,
+  removePrerequisite,
+  addClue,
+  setNextPuzzle,
+  removeClue
 };
