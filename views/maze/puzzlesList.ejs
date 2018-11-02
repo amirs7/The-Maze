@@ -1,27 +1,35 @@
 <head>
     <title>The Maze</title>
     <link rel="stylesheet" href="/stylesheets/puzzleList.css">
-    <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha21/dist/font-face.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha21/dist/font-face.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+        crossorigin="anonymous">
 </head>
+
 <body>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
-    <div class="maze_image">
-        <img src="/images/maze_pic.jpg">
-    </div>
+    <!-- <div class="maze_image">
+        <img src="./maze_pic.jpg">
+    </div> -->
     <div class="header">
         <h3> پازل های باز شده : </h3>
         <div class="links">
-            <a href="/images/maze_instruction.pdf">
+
+            <div class="icons" onclick="openInstruction()">
                 <button class="btn"> دستورالعمل </button>
-            </a>
-            <a href="/images/newMap.JPG">
+                <i class="fa fa-info"></i>
+            </div>
+
+            <div class="icons" onclick="openMap()">
                 <button class="btn"> نقشه مناطق </button>
-            </a>
+                <i class="fa fa-map"></i>
+            </div>
+
         </div>
     </div>
     <div class="card_container">
