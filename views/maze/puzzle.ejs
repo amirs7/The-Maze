@@ -48,12 +48,12 @@
     <div class="answers">
         <div class="item_container">
             <% if (answers.length>0) { %>
-            <% answers.forEach(function(answer) { %>
-            <div class="answer_item">
-                <img src="/images/cross.png">
-                <%= answer.text %>
-            </div>
-            <% }) %>
+                <% answers.forEach(function(answer) { %>
+                <div class="answer_item">
+                    <img src="/images/cross.png">
+                    <%= answer.text %>
+                </div>
+                <% }) %>
             <% } else { %>
             <p class="empty_items"> پاسخی ارسال نکردید! </p>
             <% } %>
@@ -71,7 +71,7 @@
     <div class="hints">
         <h5>راهنمایی ها:</h5>
         <div class="item_container">
-            <% if (hints) { %>
+            <% if (hints.legnth>0) { %>
             <ul>
                 <% hints.forEach(function(hint, i) { %>
                 <div class="hint_detail">
