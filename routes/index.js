@@ -16,6 +16,9 @@ app.use('/user', userRoutes);
 app.use('/maze', mazeRoutes);
 app.use('/admin', adminRoutes);
 
+app.get('/', (req, res, next) => {
+  res.redirect('/user/login');
+})
 app.get('/about', (req, res, next) => {
   res.render('about');
 });
