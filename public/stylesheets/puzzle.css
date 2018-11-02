@@ -30,7 +30,7 @@ body {
 	width: 30%;
 	height: 50px;
 	margin-right: 3%;
-	border-bottom: 1px solid black;
+	border-bottom: 2px solid grey;
 }
 
 .section_head p {
@@ -167,6 +167,10 @@ input {
 	padding: 5px 10px;
 	display: block;
 	width: 175px;
+	border-radius: 13px;
+	border: none;
+	text-align: left;
+	outline: none;
 }
 
 .hint_message textarea {
@@ -176,8 +180,10 @@ input {
 }
 
 .answer_submit {
+	border-radius: 10px;
+	width: 80px;
 	display: block;
-	background: rgb(1, 170, 1);
+	background: rgb(134, 134, 134);
 	margin-right: 2%;
 	margin-top: 15px;
 	border: none;
@@ -187,7 +193,8 @@ input {
 }
 
 .answer_submit:hover {
-	background: green;
+	background: #c8c8c8;
+	cursor: pointer;
 }
 
 .hints {
@@ -257,12 +264,17 @@ input {
 }
 
 .successful_message {
+	line-height: 1.7;
+	border-radius: 20px;
+	width: 260px;
 	margin: 0 auto;
-	background: green;
-	width: 170px;
+	background: #446144;
 	height: 30px;
 	text-align: center;
-	font-style: italic;
 	border: none;
 	/* border-radius: 30% !important; */
+}
+
+h1 {
+	margin-top: 30px;
 }
