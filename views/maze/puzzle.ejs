@@ -24,7 +24,6 @@
     </div>
     <div class="description">
         <%- mazePuzzle.puzzle.description %>
-        <!-- <iframe src="<%= mazePuzzle.title %>.html" frameborder="0"></iframe> -->
     </div>
     <% if(status === 'solved'){ %>
     <div class="section_head">
@@ -135,4 +134,15 @@
     <li>
         <div>
             <p>Code:<%= hint.code %></p>
-            <textarea disabled><%= hint.question %>
+            <textarea disabled><%= hint.question %></textarea>
+            <textarea disabled><%= hint.answer %></textarea>
+        </div>
+    </li>
+    <% }) %>
+</ul>
+<form action="/maze/puzzles/<%= mazePuzzle.id %>/hint" method="post">
+    <input name="code" placeholder="Hint Code">
+    <textarea name="question" placeholder="Type your question here"></textarea>
+    <button type="submit">Request Hint</button>
+</form>
+<% } %> -->
