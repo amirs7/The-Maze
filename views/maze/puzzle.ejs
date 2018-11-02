@@ -23,8 +23,8 @@
         <p> توضیحات پازل </p>
     </div>
     <div class="description">
-        <!-- <%- mazePuzzle.puzzle.description %> -->
-        <iframe src="<%= mazePuzzle.title %>.ejs" frameborder="0"></iframe>
+        <%- mazePuzzle.puzzle.description %>
+        <!-- <iframe src="/maze/puzzles/<%= mazePuzzle.puzzle.id %>" frameborder="0"></iframe> -->
     </div>
     <% if(status === 'solved'){ %>
     <div class="section_head">
