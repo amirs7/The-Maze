@@ -23,7 +23,8 @@
         <p> توضیحات پازل </p>
     </div>
     <div class="description">
-        <%- mazePuzzle.puzzle.description %>
+        <!-- <%- mazePuzzle.puzzle.description %> -->
+        <iframe src="<%= mazePuzzle.title %>.html" frameborder="0"></iframe>
     </div>
     <% if(status === 'solved'){ %>
     <div class="section_head">
@@ -91,10 +92,10 @@
             <div class="hint_code">
                 کد راهنمایی : <input name="code">
             </div>
-            <div class="hint_message">
-                <p> متن سوال : </p>
-                <textarea spellcheck="false" name="question" rows="3" cols="30"> </textarea>
-            </div>
+            <!-- <div class="hint_message"> -->
+            <!-- <p> متن سوال : </p> -->
+            <!-- <textarea spellcheck="false" name="question" rows="3" cols="30"> </textarea> -->
+            <!-- </div> -->
             <button type="submit" class="answer_submit">
                 ارسال
             </button>
